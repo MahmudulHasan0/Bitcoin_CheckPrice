@@ -3,8 +3,8 @@ import requests #most downloaded package. make HTML requests. parse data
 from bs4 import BeautifulSoup as soup #bs4.BeautifulSoup = soup
 
 #1) OPEN BROWSER:
-chromeDriver_path = r"C:\Users\Mahmudul\Downloads\chromedriver_win32\chromedriver.exe" #do need to add an "r" for it to work for some reason
-driver = webdriver.Chrome(chromeDriver_path)  #this will open up chrome with address: "data:;"
+chromeDriver_path = r"C:\Users\Mahmudul\Downloads\chromedriver_win32\chromedriver.exe" 
+driver = webdriver.Chrome(chromeDriver_path)  
 
 #open page
 driver.get("https://www.google.com/search?source=hp&ei=2OhsWvKLGMO4zwK58aGQDQ&q=bitcoin+to+usd&oq=&gs_l=") 
