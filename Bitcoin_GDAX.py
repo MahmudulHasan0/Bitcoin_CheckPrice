@@ -5,7 +5,7 @@ import time		#to refresh scans, repeat function
 import sys		#to print in one line
 #MY BITCOIN:
 myBTC = 0.008385640 
-myDollar = 99 					#what i put in
+myDollar = 99 					
 profit = 0
 profit_past = 0
 firstTimeRunning = True
