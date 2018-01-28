@@ -44,19 +44,18 @@ def calcProfits():
 	if (profit != profit_past):
 		if (profit > profit_past):
 			diff = round(profit - profit_past, 4)
-			sys.stdout.write(str(diff) + "    ")    		#print $ +rounded change 
+			sys.stdout.write("+" + str(diff) + "    ")    		#print $ +rounded change 
 			percent_change = round(diff/profit_past,4)
-			sys.stdout.write(str(percent_change) + "%\n")	#print % +rounded change
+			sys.stdout.write("+" + str(percent_change) + "%\n")	#print % +rounded change
 			
 		if (profit < profit_past):
 			diff = round(profit_past - profit, 4)
-			sys.stdout.write(str(diff) + "    ")			#print $ -rounded change 
+			sys.stdout.write("-" + str(diff) + "    ")			#print $ -rounded change 
 			percent_change = round(diff/profit_past, 4)
-			sys.stdout.write(str(percent_change) + "%\n")	#print % -rounded change
+			sys.stdout.write("-" + str(percent_change) + "%\n")	#print % -rounded change
 
 	if (profit == profit_past):
 			sys.stdout.write("NO CHANGE" + '\n')			
-
 
 #PRINT TO HTML:
 	htmlf = open('profit.html', 'w') #paste the profit onto the profit.html file!
@@ -64,8 +63,10 @@ def calcProfits():
 	htmlf.close()
 #REFRESH:
 	count += 1
+	if (count == 60):       	#after 60 repeats, reset the past profit
+		count = 0;
+		firstTimeRunning = True
 	time.sleep(1)	#program take .5s to execute. so making it refresh at .9s
-
 
 while True:
 	calcProfits()
