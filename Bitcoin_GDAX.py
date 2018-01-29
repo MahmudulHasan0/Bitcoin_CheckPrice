@@ -10,6 +10,7 @@ profit = 0
 profit_past = 0
 firstTimeRunning = True
 count = 0
+
 def calcProfits():
 	global firstTimeRunning
 	global profit
@@ -22,22 +23,23 @@ def calcProfits():
 	currDollarBit = json_res[0]['price']    #current dollars per bitcoin. 'price' is the location in the 0th index of "jason_res"
 	currDollarBit = float(currDollarBit)    #turning to float to make calculations
 	currDollar = myBTC * currDollarBit
-	profit = currDollar - 99
-    	
+	profit = round(currDollar - 99, 3)
+
 #Calculate Profits:
 	if (profit == 0):  #if im gaining money
-		sys.stdout.write("base: $" +  str(profit) + "      ")
+		sys.stdout.write("base: $" +  str(abs(profit)) + "      ")
 	elif (profit > 0):  #if im gaining money
-		sys.stdout.write("profit: $" +  str(profit) + "      ")
+		sys.stdout.write("gain: +$" +  str(abs(profit)) + "      ")
 	elif (profit < 0):  	#if im losing money
-		sys.stdout.write("loss: $" + str(profit) + "      ")
-	sys.stdout.write("BTC/USD: " + str(currDollarBit) + "      ")  #current BTC/USD
+		sys.stdout.write("loss: -$" + str(abs(profit)) + "      ")
+#Calculate My Current Profit:
+	
 #Calculate Percent Change/slope
+	sys.stdout.write("BTC/USD: " + str(currDollarBit) + "      ")  #current BTC/USD
 	if (firstTimeRunning == True):
 		firstTimeRunning = False
 		profit_past = profit
 		print("\nChanged Last Profit")
-
 	if (profit != profit_past):
 		if (profit > profit_past):
 			diff = abs(round(profit - profit_past, 4))
@@ -50,10 +52,8 @@ def calcProfits():
 			sys.stdout.write("-$" + str(diff) + "    ")			#print $ -rounded change 
 			percent_change = abs(round(diff/profit_past, 4))
 			sys.stdout.write("-" + str(percent_change) + "%\n")	#print % -rounded change
-
 	if (profit == profit_past):
 			sys.stdout.write("NO CHANGE" + '\n')			
-
 #PRINT TO HTML:
 	htmlf = open('profit.html', 'w') #paste the profit onto the profit.html file!
 	htmlf.write(str(profit))
