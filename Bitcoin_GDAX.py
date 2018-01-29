@@ -36,7 +36,7 @@ def calcProfits():
 	if (firstTimeRunning == True):
 		firstTimeRunning = False
 		profit_past = profit
-		print("\n Changed Last Profit")
+		print("\nChanged Last Profit")
 
 	if (profit != profit_past):
 		if (profit > profit_past):
