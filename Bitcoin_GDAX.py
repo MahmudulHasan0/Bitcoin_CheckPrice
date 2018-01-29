@@ -64,7 +64,7 @@ def calcProfits():
 		count = 0;
 		firstTimeRunning = True
 	time.sleep(1)	#program take .5s to execute. so making it refresh at .9s
-
+#ok
 while True:
 	calcProfits()
 	
