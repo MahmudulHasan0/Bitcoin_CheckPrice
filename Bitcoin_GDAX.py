@@ -4,15 +4,20 @@ import json
 import time		#to refresh scans, repeat function
 import sys		#to print in one line
 
-#MY BITCOIN:
-myBTC = 0.01710293
-myDollar = 200#197				
+myBTC = 0#0.01710293 
+myDollar = 0#200#197				
 profit = 0
 profit_past = 0
 firstTimeRunning = True
 count = 0
-sys.stdout.write("CURRENT INVESTMENT   |    G/L DOLLARS, G/L PERCENTAGE   |   BTC/USD   |   PERCENT CHANGES\n\n")
+#MY BITCOIN: bitcoin[USD, BTC, USD/BTC]
+bitcoins = [ [100, 0.00838564, 11805.90], [50, 0.00438647, 11170.71], [50, 0.00433082, 11314.25] ]	 
+for i in range(len(bitcoins)):
+	myDollar = myDollar + bitcoins[i][0] 
+	myBTC = myBTC + bitcoins[i][1] 
 
+
+sys.stdout.write("CURRENT INVESTMENT   |    G/L DOLLARS, G/L PERCENTAGE   |   BTC/USD   |   PERCENT CHANGES\n\n")
 def calcProfits():
 	global firstTimeRunning
 	global profit
