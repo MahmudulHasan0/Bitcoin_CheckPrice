@@ -6,7 +6,7 @@ import sys		#to print in one line
 
 #MY BITCOIN:
 myBTC = 0.01710293
-myDollar = 197				
+myDollar = 200#197				
 profit = 0
 profit_past = 0
 firstTimeRunning = True
@@ -29,14 +29,14 @@ def calcProfits():
 
 
 #Calculate Profits:
-	percent_change = abs(round(abs(profit)/myDollar, 4))
+	percent_change = abs(round(abs(profit)/myDollar*100, 3))
 	if (profit == 0): 
 		
-		sys.stdout.write("$" +  str(abs(currDollar)) + "   |   base:    $" +  str(abs(profit)) + "    " + str(abs(percent_change)) +  "%   |   ")
+		sys.stdout.write("$" +  str(abs(currDollar)) + "   |   base:  $" +  str(abs(profit)) + "    " + str(abs(percent_change)) +  "%   |   ")
 	elif (profit > 0):  
-		sys.stdout.write("$" +  str(abs(currDollar)) + "   |   gain:    +$" + str(abs(profit)) + "   +" + str(abs(percent_change)) + "%   |   ")
+		sys.stdout.write("$" +  str(abs(currDollar)) + "   |   gain:  +$" + str(abs(profit)) + "   +" + str(abs(percent_change)) + "%   |   ")
 	elif (profit < 0):  	
-		sys.stdout.write("$" +  str(abs(currDollar)) + "   |   loss:    -$" + str(abs(profit)) + "   -" + str(abs(percent_change)) +  "%   |   ")	
+		sys.stdout.write("$" +  str(abs(currDollar)) + "   |   loss:  -$" + str(abs(profit)) + "   -" + str(abs(percent_change)) +  "%   |   ")	
 
 #Calculate Percent Change/slope  --> Make with constructor next time
 	sys.stdout.write("BTC/USD: " + str(currDollarBit) + "   |   ")
@@ -45,8 +45,8 @@ def calcProfits():
 		profit_past = profit
 		print("\nChanged Last Profit")
 	if (profit > profit_past):
-		diff = abs(round(profit - profit_past, 4))
-		percent_change = abs(round(diff/profit_past,4))
+		diff = abs(round(profit - profit_past, 3))
+		percent_change = abs(round(diff/profit_past*100,4))
 		sys.stdout.write("+$" + str(diff) + "    ")    		
 		sys.stdout.write("+" + str(percent_change) + "%\n")
 	elif (profit < profit_past):
