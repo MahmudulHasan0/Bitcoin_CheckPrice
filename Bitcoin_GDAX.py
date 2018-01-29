@@ -62,7 +62,7 @@ def calcProfits():
 	count += 1
 	if (count == 60):       	#after 60 repeats, reset the past profit
 		count = 0;
-ss		firstTimeRunning = True
+		firstTimeRunning = True
 	time.sleep(1)	#program take .5s to execute. so making it refresh at .9s
 while True:
 	calcProfits()
