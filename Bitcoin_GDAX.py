@@ -39,19 +39,19 @@ def calcProfits():
 	if (firstTimeRunning == True):
 		firstTimeRunning = False
 		profit_past = profit
-		print("Changed Last Profit")
+		print("\n Changed Last Profit")
 
 	if (profit != profit_past):
 		if (profit > profit_past):
-			diff = round(profit - profit_past, 4)
-			sys.stdout.write("+" + str(diff) + "    ")    		#print $ +rounded change 
-			percent_change = round(diff/profit_past,4)
+			diff = abs(round(profit - profit_past, 4))
+			sys.stdout.write("+$" + str(diff) + "    ")    		#print $ +rounded change 
+			percent_change = abs(round(diff/profit_past,4))
 			sys.stdout.write("+" + str(percent_change) + "%\n")	#print % +rounded change
 			
 		if (profit < profit_past):
-			diff = round(profit_past - profit, 4)
-			sys.stdout.write("-" + str(diff) + "    ")			#print $ -rounded change 
-			percent_change = round(diff/profit_past, 4)
+			diff = abs(round(profit_past - profit, 4))
+			sys.stdout.write("-$" + str(diff) + "    ")			#print $ -rounded change 
+			percent_change = abs(round(diff/profit_past, 4))
 			sys.stdout.write("-" + str(percent_change) + "%\n")	#print % -rounded change
 
 	if (profit == profit_past):
