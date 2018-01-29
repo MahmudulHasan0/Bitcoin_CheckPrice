@@ -56,13 +56,13 @@ def calcProfits():
 			sys.stdout.write("NO CHANGE" + '\n')			
 #PRINT TO HTML:
 	htmlf = open('profit.html', 'w') #paste the profit onto the profit.html file!
-	htmlf.write(str(profit))
+	#htmlf.write(str(profit))
 	htmlf.close()
 #REFRESH:
 	count += 1
 	if (count == 60):       	#after 60 repeats, reset the past profit
 		count = 0;
-ss		firstTimeRunning = True
+		firstTimeRunning = True
 	time.sleep(1)	#program take .5s to execute. so making it refresh at .9s
 while True:
 	calcProfits()
