@@ -4,13 +4,13 @@ import json
 import time		#to refresh scans, repeat function
 import sys		#to print in one line
 #MY BITCOIN:
-myBTC = 0.008385640 
-myDollar = 99 					
+myBTC = 0.012716460
+myDollar = 148					
 profit = 0
 profit_past = 0
 firstTimeRunning = True
 count = 0
-
+sys.stdout.write("CURRENT INVESTMENT,    GAIN/LOSS    |   BTC/USD   |   CHANGES\n")
 def calcProfits():
 	global firstTimeRunning
 	global profit
@@ -23,15 +23,15 @@ def calcProfits():
 	currDollarBit = json_res[0]['price']    #current dollars per bitcoin. 'price' is the location in the 0th index of "jason_res"
 	currDollarBit = float(currDollarBit)    #turning to float to make calculations
 	currDollar = round(myBTC * currDollarBit, 3)
-	profit = round(currDollar - 99, 3)
-
+	profit = round(currDollar - myDollar, 3)
+    
 #Calculate Profits:
 	if (profit == 0):  #if im gaining money
 		sys.stdout.write("base: $" +  str(abs(currDollar)) + "   $" +  str(abs(profit)) + "   |   ")
 	elif (profit > 0):  #if im gaining money
-		sys.stdout.write("gain: +$" +  str(abs(currDollar)) + "   +$" + str(abs(profit)) + "   |   ")
+		sys.stdout.write("gain: $" +  str(abs(currDollar)) + "   +$" + str(abs(profit)) + "   |   ")
 	elif (profit < 0):  	#if im losing money
-		sys.stdout.write("loss: -$" +  str(abs(currDollar)) + "   -$" + str(abs(profit)) + "   |   ")
+		sys.stdout.write("loss: $" +  str(abs(currDollar)) + "   -$" + str(abs(profit)) + "   |   ")
 #Calculate My Current Profit:
 	
 #Calculate Percent Change/slope
