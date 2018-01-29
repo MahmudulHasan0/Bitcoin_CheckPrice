@@ -11,7 +11,7 @@ profit = 0
 profit_past = 0
 firstTimeRunning = True
 count = 0
-sys.stdout.write("CURRENT INVESTMENT, G/L DOLLARS, G/L PERCENTAGE   |   BTC/USD   |   PERCENT CHANGES\n\n")
+sys.stdout.write("CURRENT INVESTMENT   |    G/L DOLLARS, G/L PERCENTAGE   |   BTC/USD   |   PERCENT CHANGES\n\n")
 
 def calcProfits():
 	global firstTimeRunning
@@ -32,11 +32,11 @@ def calcProfits():
 	percent_change = abs(round(abs(profit)/myDollar, 4))
 	if (profit == 0): 
 		
-		sys.stdout.write("$" +  str(abs(currDollar)) + "   base:    $" +  str(abs(profit)) + "    " + str(abs(percent_change)) +  "%   |   ")
+		sys.stdout.write("$" +  str(abs(currDollar)) + "   |   base:    $" +  str(abs(profit)) + "    " + str(abs(percent_change)) +  "%   |   ")
 	elif (profit > 0):  
-		sys.stdout.write("$" +  str(abs(currDollar)) + "   gain:    +$" + str(abs(profit)) + "   +" + str(abs(percent_change)) + "%   |   ")
+		sys.stdout.write("$" +  str(abs(currDollar)) + "   |   gain:    +$" + str(abs(profit)) + "   +" + str(abs(percent_change)) + "%   |   ")
 	elif (profit < 0):  	
-		sys.stdout.write("$" +  str(abs(currDollar)) + "   loss:    -$" + str(abs(profit)) + "   -" + str(abs(percent_change)) +  "%   |   ")	
+		sys.stdout.write("$" +  str(abs(currDollar)) + "   |   loss:    -$" + str(abs(profit)) + "   -" + str(abs(percent_change)) +  "%   |   ")	
 
 #Calculate Percent Change/slope  --> Make with constructor next time
 	sys.stdout.write("BTC/USD: " + str(currDollarBit) + "   |   ")
