@@ -46,13 +46,13 @@ def calcProfits():
 	if (profit > profit_past):
 		diff = abs(round(profit - profit_past, 4))
 		percent_change = abs(round(diff/profit_past,4))
-		sys.stdout.write("+$" + str(diff) + "    ")    		#print $ +rounded change 
-		sys.stdout.write("+" + str(percent_change) + "%\n")	#print % +rounded change
+		sys.stdout.write("+$" + str(diff) + "    ")    		
+		sys.stdout.write("+" + str(percent_change) + "%\n")
 	elif (profit < profit_past):
 		diff = abs(round(profit_past - profit, 4))
 		percent_change = abs(round(diff/profit_past, 4))
-		sys.stdout.write("-$" + str(diff) + "    ")			#print $ -rounded change 
-		sys.stdout.write("-" + str(percent_change) + "%\n")	#print % -rounded change
+		sys.stdout.write("-$" + str(diff) + "    ")			
+		sys.stdout.write("-" + str(percent_change) + "%\n")
 	elif (profit == profit_past):
 		sys.stdout.write("NO CHANGE" + '\n')			
 
@@ -63,7 +63,7 @@ def calcProfits():
 
 #REFRESH:
 	count += 1
-	if (count == 60):       	#after 60 repeats, reset the past profit
+	if (count == 60):       	
 		count = 0;
 		firstTimeRunning = True
 	time.sleep(1)	
