@@ -56,7 +56,7 @@ def calcProfits():
 			sys.stdout.write("NO CHANGE" + '\n')			
 #PRINT TO HTML:
 	htmlf = open('profit.html', 'w') #paste the profit onto the profit.html file!
-	htmlf.write(str(profit))
+	#htmlf.write(str(profit))
 	htmlf.close()
 #REFRESH:
 	count += 1
