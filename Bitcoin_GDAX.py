@@ -31,8 +31,6 @@ def calcProfits():
 		sys.stdout.write("profit: $" +  str(profit) + "      ")
 	elif (profit < 0):  	#if im losing money
 		sys.stdout.write("loss: $" + str(profit) + "      ")
-	else:
-		print()
 
 	sys.stdout.write("BTC/USD: " + str(currDollarBit) + "      ")
 #Calculate Percent Change/slope
