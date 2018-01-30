@@ -71,7 +71,8 @@ def calcProfits():
 		firstTimeRunning = True
 	t1 = time.time()
 	total = round((t1-t0),3)
-	sys.stdout.write("    " + str(total)+" sec")
+	sys.stdout.write("         " + str(total)+" sec")
+
 	print()
 	time.sleep(.5)	
 
