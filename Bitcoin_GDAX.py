@@ -26,19 +26,19 @@ def calcProfits():
 	for i in range(len(market)):
 		total.USD = total.USD + market[i][0] 
 		total.BTC = total.BTC + market[i][1] 
-	exchanges = list(range(0,len(market)))  #making an array as long at the elements in the market array
+	"""exchanges = list(range(0,len(market)))  #making an array as long at the elements in the market array
 	for i in range(len(market)):
-		exchanges[i] = MyProfits()  
-		exchanges[i].USD = exchanges[i].USD + market[i][0] 
-		exchanges[i].BTC = exchanges[i].BTC + market[i][1] 
+					exchanges[i] = MyProfits()  
+					exchanges[i].USD = exchanges[i].USD + market[i][0] 
+					exchanges[i].BTC = exchanges[i].BTC + market[i][1] """
 	
 	if (firstTimeRunning == True):
 		sys.stdout.write("CURRENT INVESTMENT   |    G/L DOLLARS, G/L PERCENTAGE   |   BTC/USD   |   PERCENT CHANGES   |   MY_TOTAL_BTC: "+ str(round(total.BTC,4))+"\n\n")
 #GET CURRENT PRICE OF BITCOIN:
 	url = 'https://api.gdax.com/products/BTC-USD/trades'
 	res = requests.get(url)
-	json_res = json.loads(res.text) 		#"json_res" got a ton of stuff. the price is in "json_res[0]""
-	currDollarBit = float(json_res[0]['price'])    #current dollars per bitcoin. 'price' is the location in the 0th index of "jason_res" #turning to float to make calculations 
+	json_res = json.loads(res.text) 				#"json_res" got a ton of stuff. the price is in "json_res[0]""
+	currDollarBit = float(json_res[0]['price'])     #current dollars per bitcoin. 'price' is the location in the 0th index of "jason_res" #turning to float to make calculations 
 	currDollar = round(total.BTC * currDollarBit, 3)
 	total.profit = round(currDollar - total.USD, 3)
 
@@ -57,6 +57,10 @@ def calcProfits():
 		firstTimeRunning = False
 		total.profit_prev = total.profit
 		print("\nChanged Last total.profit")
+
+	print("\nprof:  "+str(total.profit_prev))
+	print()
+
 	if (total.profit > total.profit_prev):
 		diff = abs(round(total.profit - total.profit_prev, 3))
 		percent_change = abs(round(diff/total.profit_prev*100,4))
@@ -64,6 +68,9 @@ def calcProfits():
 		sys.stdout.write("+" + str(percent_change) + "%")
 	elif (total.profit < total.profit_prev):
 		diff = abs(round(total.profit_prev - total.profit, 3))
+		print(diff)
+		print()
+
 		percent_change = abs(round(diff/total.profit_prev*100, 4))
 		sys.stdout.write("-$" + str(diff) + "    ")			
 		sys.stdout.write("-" + str(percent_change) + "%")
