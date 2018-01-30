@@ -18,6 +18,7 @@ for i in range(len(bitcoins)):
 
 sys.stdout.write("CURRENT INVESTMENT   |    G/L DOLLARS, G/L PERCENTAGE   |   BTC/USD   |   PERCENT CHANGES\n\n")
 def calcProfits():
+	t0 = time.time()
 	global firstTimeRunning
 	global profit
 	global profit_past
@@ -26,11 +27,9 @@ def calcProfits():
 	url = 'https://api.gdax.com/products/BTC-USD/trades'
 	res = requests.get(url)
 	json_res = json.loads(res.text) 		#"json_res" got a ton of stuff. the price is in "json_res[0]""
-	currDollarBit = json_res[0]['price']    #current dollars per bitcoin. 'price' is the location in the 0th index of "jason_res"
-	currDollarBit = float(currDollarBit)    #turning to float to make calculations
+	currDollarBit = float(json_res[0]['price'])    #current dollars per bitcoin. 'price' is the location in the 0th index of "jason_res" #turning to float to make calculations 
 	currDollar = round(myBTC * currDollarBit, 3)
 	profit = round(currDollar - myDollar, 3)
-
 
 #Calculate Profits:
 	percent_change = abs(round(abs(profit)/myDollar*100, 3))
@@ -59,7 +58,6 @@ def calcProfits():
 		sys.stdout.write("-" + str(percent_change) + "%")
 	elif (profit == profit_past):
 		sys.stdout.write("NO CHANGE")			
-	print()
 #PRINT TO HTML:
 	htmlf = open('profit.html', 'w') #paste the profit onto the profit.html file!
 	#htmlf.write(str(profit))
@@ -70,7 +68,11 @@ def calcProfits():
 	if (count == 60):       	
 		count = 0;
 		firstTimeRunning = True
-	time.sleep(1)	
+	t1 = time.time()
+	total = round((t1-t0),3)
+	sys.stdout.write("    " + str(total)+" sec")
+	print()
+	time.sleep(.6)	
 
 while True:
 	calcProfits()
