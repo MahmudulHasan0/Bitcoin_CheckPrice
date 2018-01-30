@@ -1,11 +1,11 @@
 #Working
 import requests
 import json
-import time		#to refresh scans, repeat function
-import sys		#to print in one line
+import time		
+import sys		
 
-myBTC = 0		#0.01710293 
-myDollar = 0	#200#197				
+myBTC = 0		
+myDollar = 0					
 profit = 0
 profit_past = 0
 firstTimeRunning = True
@@ -16,7 +16,7 @@ for i in range(len(bitcoins)):
 	myDollar = myDollar + bitcoins[i][0] 
 	myBTC = myBTC + bitcoins[i][1] 
 
-sys.stdout.write("CURRENT INVESTMENT   |    G/L DOLLARS, G/L PERCENTAGE   |   BTC/USD   |   PERCENT CHANGES\n\n")
+sys.stdout.write("CURRENT INVESTMENT   |    G/L DOLLARS, G/L PERCENTAGE   |   BTC/USD   |   PERCENT CHANGES   |   MY_TOTAL_BTC: "+ str(round(myBTC,4))+"\n\n")
 def calcProfits():
 	t0 = time.time()
 	global firstTimeRunning
@@ -27,10 +27,13 @@ def calcProfits():
 	url = 'https://api.gdax.com/products/BTC-USD/trades'
 	res = requests.get(url)
 	json_res = json.loads(res.text) 		#"json_res" got a ton of stuff. the price is in "json_res[0]""
+<<<<<<< HEAD
 	currDollarBit = float(json_res[0]['price'])    #current dollars per bitcoin. 'price' is the location in the 0th index of "jason_res" #turning to float to make calculations
+=======
+	currDollarBit = float(json_res[0]['price'])    #current dollars per bitcoin. 'price' is the location in the 0th index of "jason_res" #turning to float to make calculations 
+>>>>>>> test
 	currDollar = round(myBTC * currDollarBit, 3)
 	profit = round(currDollar - myDollar, 3)
-
 
 #Calculate Profits:
 	percent_change = abs(round(abs(profit)/myDollar*100, 3))
@@ -58,7 +61,11 @@ def calcProfits():
 		sys.stdout.write("-$" + str(diff) + "    ")			
 		sys.stdout.write("-" + str(percent_change) + "%")
 	elif (profit == profit_past):
+<<<<<<< HEAD
 		sys.stdout.write("NO CHANGE")		
+=======
+		sys.stdout.write("NO CHANGE")			
+>>>>>>> test
 #PRINT TO HTML:
 	htmlf = open('profit.html', 'w') #paste the profit onto the profit.html file!
 	#htmlf.write(str(profit))
@@ -71,10 +78,16 @@ def calcProfits():
 		firstTimeRunning = True
 	t1 = time.time()
 	total = round((t1-t0),3)
+<<<<<<< HEAD
 	sys.stdout.write("         " + str(total)+" sec")
 
 	print()
 	time.sleep(.5)	
+=======
+	sys.stdout.write("    |  " + str(total)+" sec")
+	print()
+	time.sleep(.6)	
+>>>>>>> test
 
 while True:
 	calcProfits()
