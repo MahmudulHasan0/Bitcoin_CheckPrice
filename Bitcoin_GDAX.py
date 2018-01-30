@@ -73,7 +73,7 @@ def calcProfits():
 	total = round((t1-t0),3)
 	sys.stdout.write("    " + str(total)+" sec")
 	print()
-	time.sleep(.6)	
+	time.sleep(.5)	
 
 while True:
 	calcProfits()
