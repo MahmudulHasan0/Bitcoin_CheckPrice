@@ -1,11 +1,11 @@
 #Working
 import requests
 import json
-import time		#to refresh scans, repeat function
-import sys		#to print in one line
+import time		
+import sys		
 
-myBTC = 0		#0.01710293 
-myDollar = 0	#200#197				
+myBTC = 0		
+myDollar = 0					
 profit = 0
 profit_past = 0
 firstTimeRunning = True
@@ -16,7 +16,7 @@ for i in range(len(bitcoins)):
 	myDollar = myDollar + bitcoins[i][0] 
 	myBTC = myBTC + bitcoins[i][1] 
 
-sys.stdout.write("CURRENT INVESTMENT   |    G/L DOLLARS, G/L PERCENTAGE   |   BTC/USD   |   PERCENT CHANGES\n\n")
+sys.stdout.write("CURRENT INVESTMENT   |    G/L DOLLARS, G/L PERCENTAGE   |   BTC/USD   |   PERCENT CHANGES   |   MY_TOTAL_BTC: "+ str(round(myBTC,4))+"\n\n")
 def calcProfits():
 	t0 = time.time()
 	global firstTimeRunning
@@ -70,7 +70,7 @@ def calcProfits():
 		firstTimeRunning = True
 	t1 = time.time()
 	total = round((t1-t0),3)
-	sys.stdout.write("    " + str(total)+" sec")
+	sys.stdout.write("    |  " + str(total)+" sec")
 	print()
 	time.sleep(.6)	
 
