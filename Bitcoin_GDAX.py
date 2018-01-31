@@ -46,11 +46,11 @@ def calcProfits():
 #Calculate total profits:
 	percent_change = abs(round(abs(total.profit)/total.USD*100, 3))
 	if (total.profit == 0): 
-		sys.stdout.write("$" +  str(abs(currDollar)) + "  |  base: $" +  str(abs(total.profit)) + "   " + str(abs(percent_change)) +  "%  |  ")
+		sys.stdout.write("$" +  str(abs(currDollar)) + "  |  base: $" +  str(abs(total.profit)) + " " + str(abs(percent_change)) +  "%   ")
 	elif (total.profit > 0):  
-		sys.stdout.write("$" +  str(abs(currDollar)) + "  |  gain: +$" + str(abs(total.profit)) + "  +" + str(abs(percent_change)) + "%  |  ")
+		sys.stdout.write("$" +  str(abs(currDollar)) + "  |  gain:+$" + str(abs(total.profit)) + " +" + str(abs(percent_change)) + "%  |  ")
 	elif (total.profit < 0):  	
-		sys.stdout.write("$" +  str(abs(currDollar)) + "  |  loss: -$" + str(abs(total.profit)) + "  -" + str(abs(percent_change)) +  "%  |  ")	
+		sys.stdout.write("$" +  str(abs(currDollar)) + "  |  loss:-$" + str(abs(total.profit)) + " -" + str(abs(percent_change)) +  "%  |  ")	
 
 #Calculate Percent Change/slope  --> Make with constructor next time
 	sys.stdout.write("BTC/USD: " + str(currDollarBit) + "   |   ")
@@ -86,7 +86,7 @@ def calcProfits():
 	total.USD = 0   #reseting calculations 
 	total.BTC = 0
 	print()
-	time.sleep(.6)	
+	time.sleep(1)	
 
 while True:
 	calcProfits()
