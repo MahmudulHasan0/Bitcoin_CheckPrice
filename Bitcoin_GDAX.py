@@ -22,8 +22,6 @@ def calcProfits():
 	global count
 	global total
 
-	if (firstTimeRunning == True):
-		sys.stdout.write("CURRENT INVESTMENT   |    G/L DOLLARS, G/L PERCENTAGE   |   BTC/USD   |   PERCENT CHANGES   |   MY_TOTAL_BTC: "+ str(round(total.BTC,4))+"\n\n")
 #Calculate BTC and USD for exchanges and total:	
 	for i in range(len(market)):
 		total.USD = total.USD + market[i][0] 
@@ -32,7 +30,11 @@ def calcProfits():
 	for i in range(len(market)):
 		exchanges[i] = MyProfits()  
 		exchanges[i].USD = exchanges[i].USD + market[i][0]
-		exchanges[i].BTC = exchanges[i].BTC + market[i][1] 
+		exchanges[i].BTC = exchanges[i].BTC + market[i][1]
+#Print what i have right now 
+	if (firstTimeRunning == True):
+		sys.stdout.write("CURRENT INVESTMENT   |    G/L DOLLARS, G/L PERCENTAGE   |   BTC/USD   |   PERCENT CHANGES   |   USD: "+ str(round(total.USD,3)) + "   BTC: "+ str(round(total.BTC,4))+"\n\n")
+
 	#GET CURRENT PRICE OF BITCOIN:
 	url = 'https://api.gdax.com/products/BTC-USD/trades'
 	res = requests.get(url)
@@ -69,8 +71,8 @@ def calcProfits():
 		sys.stdout.write("NO CHANGE")			
 
 #PRINT TO HTML:
-	htmlf = open('total.profit.html', 'w') #paste the total.profit onto the total.profit.html file!
-	#htmlf.write(str(total.profit))
+	htmlf = open('profit.html', 'w') #paste the total.profit onto the total.profit.html file!
+	#htmlf.write(str(profit))
 	htmlf.close()
 
 #REFRESH+ENDING:
