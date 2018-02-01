@@ -12,7 +12,6 @@ class MyProfits(object):
 		self.profit = 0
 		self.profit_prev = 0
 firstTimeRunning = True
-
 count = 0
 
 #MY BITCOIN: [USD, BTC, USD/BTC]
@@ -39,17 +38,13 @@ def calcProfits():
 	url = 'https://api.gdax.com/products/BTC-USD/trades'
 	res = requests.get(url)
 	json_res = json.loads(res.text) 			
-	currDollarBit = float(json_res[0]['price'])   
-	
+	currDollarBit = float(json_res[0]['price'])   	
 #Tell me the bitcoin and USD i have for each individual buy i made. 
 	for i in range(len(bought)):
 		exchange[i].USD = bought[i][0]
 		exchange[i].BTC = bought[i][1]
 		exchange[i].currDollar = round(exchange[i].BTC * currDollarBit, 3)
-		exchange[i].profit = round(exchange[i].currDollar - exchange[i].USD, 3)
-		#for i in range(len(bought)):
-		#Calculate exchange[i].profits
-		
+		exchange[i].profit = round(exchange[i].currDollar - exchange[i].USD, 3)	
 		if (bought[i][0] == 0):
 			exchange[i].USD = 1
 		percent_change = abs(round(abs(exchange[i].profit)/exchange[i].USD*100, 3))
