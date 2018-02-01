@@ -1,4 +1,4 @@
-#Working Object Version
+#Total Bitcoin Wallet Checker
 #strategy: python write to a file. get html to read from that file and refresh every second
 import requests
 import json
@@ -23,23 +23,14 @@ def calcProfits():
 	global firstTimeRunning
 	global count
 	global total
-
-#Calculate BTC and USD for my total profits and  individual exchanges profits:	
+#Calculate BTC and USD for my total profits:
 	#Tell me the total bitcoin and USD i currently have in this market:
 	for i in range(len(bought)):
 		total.USD = total.USD + bought[i][0] 
 		total.BTC = total.BTC + bought[i][1] 
-	#Tell me the bitcoin and USD i have for each individual buy i made. 
-	exchanges = list(range(0,len(bought)))  #making an array as long at the elements in the bought array
-	for i in range(len(bought)):
-		exchanges[i] = MyProfits()  
-		exchanges[i].USD = exchanges[i].USD + bought[i][0]
-		exchanges[i].BTC = exchanges[i].BTC + bought[i][1]
-    
 #Print what i have right now 
 	if (firstTimeRunning == True):
 		sys.stdout.write("CURRENT INVESTMENT   |    G/L DOLLARS, G/L PERCENTAGE   |   BTC/USD   |   PERCENT CHANGES   |   USD: "+ str(round(total.USD,3)) + "   BTC: "+ str(round(total.BTC,7))+"\n\n")
-
 #GET CURRENT PRICE OF BITCOIN:
 	url = 'https://api.gdax.com/products/BTC-USD/trades'
 	res = requests.get(url)
@@ -47,7 +38,6 @@ def calcProfits():
 	total.currDollarBit = float(json_res[0]['price'])     #current dollars per bitcoin. 'price' is the location in the 0th index of "jason_res" #turning to float to make calculations 
 	total.currDollar = round(total.BTC * total.currDollarBit, 3)
 	total.profit = round(total.currDollar - total.USD, 3)
-
 #Calculate total profits:
 	percent_change = abs(round(abs(total.profit)/total.USD*100, 3))
 	if (total.profit == 0): 
@@ -56,7 +46,6 @@ def calcProfits():
 		sys.stdout.write("$" +  str(abs(total.currDollar)) + "  |  gain:+$" + str(abs(total.profit)) + " +" + str(abs(percent_change)) + "%  |  ")
 	elif (total.profit < 0):  	
 		sys.stdout.write("$" +  str(abs(total.currDollar)) + "  |  loss:-$" + str(abs(total.profit)) + " -" + str(abs(percent_change)) +  "%  |  ")	
-
 #Calculate Percent Change/slope  
 	sys.stdout.write("BTC/USD: " + str(total.currDollarBit) + "   |   ")
 	if (firstTimeRunning == True):
@@ -74,7 +63,6 @@ def calcProfits():
 		sys.stdout.write("-" + str(percent_change) + "%")
 	elif (total.profit == total.profit_prev):
 		sys.stdout.write("NO CHANGE")			
-
 #PRINT TO HTML:
 	htmlf = open('profit.html', 'w') #paste the total.profit onto the total.profit.html file!
 	#htmlf.write(str(profit))
@@ -89,7 +77,7 @@ def calcProfits():
 		firstTimeRunning = True
 	t1 = time.time()
 	total_time = round((t1-t0),3)
-	sys.stdout.write("    |  " + str(total_time)+" sec        " + str(count) + "\n")
+	sys.stdout.write("  |            " + str(total_time)+" sec        " + str(count) + "\n")
 	time.sleep(1)	
 
 while True:
