@@ -17,8 +17,6 @@ total = MyProfits()
 count = 0
 
 #MY BITCOIN: [USD, BTC, USD/BTC]
-#Sold = [usd, btc, market]
-sold= [ [0, 0, 0] ]
 bought = [ [100, 0.00838564, 11805.90], [50, 0.00438647, 11170.71], [50, 0.00433082, 11314.25], [50, 0.00494595, 9907.10]  ]	 
 def calcProfits():
 	t0 = time.time()
@@ -26,10 +24,12 @@ def calcProfits():
 	global count
 	global total
 
-#Calculate BTC and USD for exchanges and total:	
+#Calculate BTC and USD for my total profits and  individual exchanges profits:	
+	#Tell me the total bitcoin and USD i currently have in this market:
 	for i in range(len(bought)):
 		total.USD = total.USD + bought[i][0] 
 		total.BTC = total.BTC + bought[i][1] 
+	#Tell me the bitcoin and USD i have for each individual buy i made. 
 	exchanges = list(range(0,len(bought)))  #making an array as long at the elements in the bought array
 	for i in range(len(bought)):
 		exchanges[i] = MyProfits()  
