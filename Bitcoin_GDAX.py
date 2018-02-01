@@ -1,5 +1,5 @@
 #Total Bitcoin Wallet Checker
-#strategy: python write to a file. get html to read from that file and refresh every second
+#Next Strategies: python write to a file. get html to read from that file and refresh every second
 import requests
 import json
 import time		
@@ -47,7 +47,7 @@ def calcProfits():
 	elif (total.profit < 0):  	
 		sys.stdout.write("$" +  str(abs(total.currDollar)) + "  |  loss:-$" + str(abs(total.profit)) + " -" + str(abs(percent_change)) +  "%  |  ")	
 #Calculate Percent Change/slope  
-	sys.stdout.write("BTC/USD: " + str(total.currDollarBit) + "   |   ")
+	sys.stdout.write("BTC/USD: " + str(total.currDollarBit) + "   |  ")
 	if (firstTimeRunning == True):
 		firstTimeRunning = False	
 		total.profit_prev = total.profit
