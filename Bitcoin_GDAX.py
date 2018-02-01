@@ -1,4 +1,5 @@
 #Working Object Version
+#strategy: python write to a file. get html to read from that file and refresh every second
 import requests
 import json
 import time		
@@ -8,6 +9,7 @@ class MyProfits(object):
 	def __init__(self):
 		self.BTC = 0		#total BTC i own
 		self.USD = 0		#total USD i own
+		self.currDollar = 0
 		self.profit = 0
 		self.profit_prev = 0
 firstTimeRunning = True
@@ -15,7 +17,9 @@ total = MyProfits()
 count = 0
 
 #MY BITCOIN: [USD, BTC, USD/BTC]
-market = [ [100, 0.00838564, 11805.90], [50, 0.00438647, 11170.71], [50, 0.00433082, 11314.25], [50, 0.00494595, 9907.10]  ]	 
+#Sold = [usd, btc, market]
+sold= [ [0, 0, 0] ]
+bought = [ [100, 0.00838564, 11805.90], [50, 0.00438647, 11170.71], [50, 0.00433082, 11314.25], [50, 0.00494595, 9907.10]  ]	 
 def calcProfits():
 	t0 = time.time()
 	global firstTimeRunning
@@ -23,37 +27,38 @@ def calcProfits():
 	global total
 
 #Calculate BTC and USD for exchanges and total:	
-	for i in range(len(market)):
-		total.USD = total.USD + market[i][0] 
-		total.BTC = total.BTC + market[i][1] 
-	exchanges = list(range(0,len(market)))  #making an array as long at the elements in the market array
-	for i in range(len(market)):
+	for i in range(len(bought)):
+		total.USD = total.USD + bought[i][0] 
+		total.BTC = total.BTC + bought[i][1] 
+	exchanges = list(range(0,len(bought)))  #making an array as long at the elements in the bought array
+	for i in range(len(bought)):
 		exchanges[i] = MyProfits()  
-		exchanges[i].USD = exchanges[i].USD + market[i][0]
-		exchanges[i].BTC = exchanges[i].BTC + market[i][1]
+		exchanges[i].USD = exchanges[i].USD + bought[i][0]
+		exchanges[i].BTC = exchanges[i].BTC + bought[i][1]
+    
 #Print what i have right now 
 	if (firstTimeRunning == True):
 		sys.stdout.write("CURRENT INVESTMENT   |    G/L DOLLARS, G/L PERCENTAGE   |   BTC/USD   |   PERCENT CHANGES   |   USD: "+ str(round(total.USD,3)) + "   BTC: "+ str(round(total.BTC,4))+"\n\n")
 
-	#GET CURRENT PRICE OF BITCOIN:
+#GET CURRENT PRICE OF BITCOIN:
 	url = 'https://api.gdax.com/products/BTC-USD/trades'
 	res = requests.get(url)
-	json_res = json.loads(res.text) 		#"json_res" got a ton of stuff. the price is in "json_res[0]""
-	currDollarBit = float(json_res[0]['price'])     #current dollars per bitcoin. 'price' is the location in the 0th index of "jason_res" #turning to float to make calculations 
-	currDollar = round(total.BTC * currDollarBit, 3)
-	total.profit = round(currDollar - total.USD, 3)
+	json_res = json.loads(res.text) 				#"json_res" got a ton of stuff. the price is in "json_res[0]""
+	total.currDollarBit = float(json_res[0]['price'])     #current dollars per bitcoin. 'price' is the location in the 0th index of "jason_res" #turning to float to make calculations 
+	total.currDollar = round(total.BTC * total.currDollarBit, 3)
+	total.profit = round(total.currDollar - total.USD, 3)
 
 #Calculate total profits:
 	percent_change = abs(round(abs(total.profit)/total.USD*100, 3))
 	if (total.profit == 0): 
-		sys.stdout.write("$" +  str(abs(currDollar)) + "  |  base: $" +  str(abs(total.profit)) + " " + str(abs(percent_change)) +  "%   ")
+		sys.stdout.write("$" +  str(abs(total.currDollar)) + "  |  base: $" +  str(abs(total.profit)) + " " + str(abs(percent_change)) +  "%   ")
 	elif (total.profit > 0):  
-		sys.stdout.write("$" +  str(abs(currDollar)) + "  |  gain:+$" + str(abs(total.profit)) + " +" + str(abs(percent_change)) + "%  |  ")
+		sys.stdout.write("$" +  str(abs(total.currDollar)) + "  |  gain:+$" + str(abs(total.profit)) + " +" + str(abs(percent_change)) + "%  |  ")
 	elif (total.profit < 0):  	
-		sys.stdout.write("$" +  str(abs(currDollar)) + "  |  loss:-$" + str(abs(total.profit)) + " -" + str(abs(percent_change)) +  "%  |  ")	
+		sys.stdout.write("$" +  str(abs(total.currDollar)) + "  |  loss:-$" + str(abs(total.profit)) + " -" + str(abs(percent_change)) +  "%  |  ")	
 
-#Calculate Percent Change/slope  --> Make with constructor next time
-	sys.stdout.write("BTC/USD: " + str(currDollarBit) + "   |   ")
+#Calculate Percent Change/slope  
+	sys.stdout.write("BTC/USD: " + str(total.currDollarBit) + "   |   ")
 	if (firstTimeRunning == True):
 		firstTimeRunning = False	
 		total.profit_prev = total.profit
@@ -76,16 +81,15 @@ def calcProfits():
 	htmlf.close()
 
 #REFRESH+ENDING:
+	total.USD = 0   #reseting calculations 
+	total.BTC = 0
 	count += 1
-	t1 = time.time()
-	total_time = round((t1-t0),3)
-	sys.stdout.write("    |  " + str(total_time)+" sec        " + str(count))
 	if (count == 60):       	
 		count = 0;
 		firstTimeRunning = True
-	total.USD = 0   #reseting calculations 
-	total.BTC = 0
-	print()
+	t1 = time.time()
+	total_time = round((t1-t0),3)
+	sys.stdout.write("    |  " + str(total_time)+" sec        " + str(count) + "\n")
 	time.sleep(1)	
 
 while True:
