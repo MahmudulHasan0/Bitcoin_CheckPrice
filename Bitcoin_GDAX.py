@@ -11,7 +11,8 @@ profit_past = 0
 firstTimeRunning = True
 count = 0
 #MY BITCOIN: [USD, BTC, USD/BTC]
-bitcoins = [ [100, 0.00838564, 11805.90], [50, 0.00438647, 11170.71], [50, 0.00433082, 11314.25] ]	 
+bitcoins = [ [100, 0.00838564, 11805.90], [50, 0.00438647, 11170.71], [50, 0.00433082, 11314.25], [50, 0.00494595, 9907.10], [0, 0.001006, 10154], [50, 0.00526249, 9311.18], [50,0.00579132, 8460.94] ]	 
+	 
 for i in range(len(bitcoins)):
 	myDollar = myDollar + bitcoins[i][0] 
 	myBTC = myBTC + bitcoins[i][1] 
