@@ -94,7 +94,7 @@ def calcProfits():
 	t1 = time.time()
 	total_time = round((t1-t0),3)
 	sys.stdout.write("    " + str(total_time)+" sec     Loop:" + str(count) + "\n")
-	time.sleep(5)
+	time.sleep(1)
 	
 while True:
 	calcProfits()
