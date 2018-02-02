@@ -71,11 +71,11 @@ def calcProfits():
 		
 #PRINT CHANGES:
 		if (exchange[i].change == 0): 
-			sys.stdout.write(str(i) + ": " + str(exchange[i].USD) + " / $"  + str(abs(exchange[i].currDollar)) + "  " + str(abs(percent_change)) + "%   |   ")
+			sys.stdout.write(str(i) + ": " + str(exchange[i].USD) + " / $"  + str(abs(exchange[i].change)) + "  " + str(abs(percent_change)) + "%   |   ")
 		elif (exchange[i].change> 0):  
-			sys.stdout.write(str(i)  + ": " + str(exchange[i].USD) + " /  $"  + str(abs(exchange[i].currDollar)) + " +" + str(abs(percent_change)) + "%   |   ")
+			sys.stdout.write(str(i)  + ": " + str(exchange[i].USD) + " /  $+"  + str(abs(exchange[i].change)) + " +" + str(abs(percent_change)) + "%   |   ")
 		elif (exchange[i].change< 0):  	
-			sys.stdout.write(str(i)  + ": " + str(exchange[i].USD) + " / $"  + str(abs(exchange[i].currDollar)) + " -" + str(abs(percent_change)) + "%   |   ")		
+			sys.stdout.write(str(i)  + ": " + str(exchange[i].USD) + " / $-"  + str(abs(exchange[i].change)) + " -" + str(abs(percent_change)) + "%   |   ")		
 		exchange[i].USD = 0  
 		exchange[i].BTC = 0
 #PRINT TO HTML:
