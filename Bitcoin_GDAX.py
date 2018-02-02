@@ -15,28 +15,43 @@ class MyProfits():
 firstTimeRunning = True
 total = MyProfits()
 count = 0
+soldUSD = 0
+soldBTC = 0
 
-#INPUTING MY BITCOIN EXCHANGES: [USD, BTC, USD/BTC]
-bought = [ [100, 0.00838564, 11805.90], [50, 0.00438647, 11170.71], [50, 0.00433082, 11314.25], [50, 0.00494595, 9907.10], [0, 0.001006, 10154], [50, 0.00526249, 9311.18]]	 
+#INPUTING MY BITCOIN EXCHANGES: BOUGHT = [USD, BTC, USD/BTC]. SOLD = [USD, BTC]
+bought = [ [-100, 0.00838564, 11805.90], [-50, 0.00438647, 11170.71], [-50, 0.00433082, 11314.25], [-50, 0.00494595, 9907.10], [0, 0.001006, 10154], [-50, 0.00526249, 9311.18]]	 
+sold   = [ [+0, -0.0]]				 #sold my BTC (-) for USD (+)
 def calcProfits():
 	t0 = time.time()
-	global firstTimeRunning,  count, total
-#CALCULATE TOTAL NUMBER OF BITCOINS I OWN AND THE TOTAL USD I SPEND ON THEM:
+	global firstTimeRunning, count, total, soldUSD, soldBTC
+#CALCULATE TOTAL NUMBER OF BTC I OWN AND THE TOTAL USDed I SPEND ON THEM + SOLD BTC:
+	for i in range(len(sold)):
+		soldUSD = sold[i][0]
+		soldBTC = sold[i][1]
 	for i in range(len(bought)):
 		total.USD = total.USD + bought[i][0] 
-		total.BTC = total.BTC + bought[i][1] 
+		total.BTC = total.BTC + bought[i][1]
+	total.USD = total.USD + soldUSD
+	total.BTC = total.BTC + soldBTC
 #PRINT WHAT I HAVE RIGHT NOW
 	if (firstTimeRunning == True):
-		sys.stdout.write("CURRENT INVESTMENT   |    G/L DOLLARS, G/L PERCENTAGE   |   BTC/USD   |   PERCENT CHANGES   |   USD: "+ str(round(total.USD,3)) + "   BTC: "+ str(round(total.BTC,7))+"\n\n")
+		sys.stdout.write("CURRENT INVESTMENT   |    G/L DOLLARS, G/L PERCENTAGE   |   BTC/USD   |   PERCENT CHANGES   ||   USD: "+ str(round(total.USD,3)) + "   BTC: "+ str(round(total.BTC,8))+"   ||   USD: +"+str(soldUSD) + "   BTC:-"+str(soldBTC)+"\n\n")
 #GET CURRENT PRICE OF BITCOIN:
 	url = 'https://api.gdax.com/products/BTC-USD/trades'
 	res = requests.get(url)
 	json_res = json.loads(res.text) 					  #"json_res" got a ton of stuff. the price is in "json_res[0]""
 	total.currDollarBit = float(json_res[0]['price'])     #current dollars per bitcoin. 'price' is the location in the 0th index of "jason_res" #turning to float to make calculations 
+
 #CALCULATE THE TOTAL CHANGES 
 	total.currDollar = round(total.BTC * total.currDollarBit, 3) #the total usd in bitcoins i have currently
-	total.change = round(total.currDollar - total.USD, 3)
-	percent_change = abs(round(abs(total.change)/total.USD*100, 3))
+	total.change = round(total.currDollar + total.USD, 3)
+	
+	if (total.USD == 0): 								
+		percent_change = 0
+	else:		#If i do sell enough to make 0 profit, this if-else statement will get rid of the "divide by 0 error"
+		percent_change = abs(round(abs(total.change)/total.USD*100, 3))
+
+#PRINT CHANGES
 	if (total.change == 0): 
 		sys.stdout.write("$" +  str(abs(total.currDollar)) + "  |  base: $" +  str(abs(total.change)) + " " + str(abs(percent_change)) +  "%  ")
 	elif (total.change > 0):  
