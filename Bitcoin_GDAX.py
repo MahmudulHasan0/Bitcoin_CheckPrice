@@ -7,8 +7,8 @@ import sys
 
 class MyProfits():
 	def __init__(self):
-		self.BTC = 0		#total btc i own
-		self.USD = 0		#total USD i own
+		self.BTC = 0		# total btc i own
+		self.USD = 0		# total USD i own
 		self.currDollar = 0
 		self.change = 0
 		self.change_prev = 0
@@ -20,7 +20,7 @@ soldBTC = 0
 
 #INPUTING MY BITCOIN EXCHANGES: BOUGHT = [USD, BTC, USD/BTC]. SOLD = [USD, BTC]
 bought = [ [-100, 0.00838564, 11805.90], [-50, 0.00438647, 11170.71], [-50, 0.00433082, 11314.25], [-50, 0.00494595, 9907.10], [0, 0.001006, 10154], [-50, 0.00526249, 9311.18], [-50,0.00579132, 8460.94] ]	 
-sold   = [ [+0, -0.0]]				 #sold my BTC (-) for USD (+)
+sold   = [ [+0, -0.0]]				 # sold my BTC (-) for USD (+)
 def calcProfits():
 	t0 = time.time()
 	global firstTimeRunning, count, total, soldUSD, soldBTC
@@ -39,25 +39,22 @@ def calcProfits():
 #GET CURRENT PRICE OF BITCOIN:
 	url = 'https://api.gdax.com/products/BTC-USD/trades'
 	res = requests.get(url)
-	json_res = json.loads(res.text) 					  #"json_res" got a ton of stuff. the price is in "json_res[0]""
-	total.currDollarBit = float(json_res[0]['price'])     #current dollars per bitcoin. 'price' is the location in the 0th index of "jason_res" #turning to float to make calculations 
-
+	json_res = json.loads(res.text) 					  # "json_res" got a ton of stuff. the price is in "json_res[0]""
+	total.currDollarBit = float(json_res[0]['price'])     # current dollars per bitcoin. 'price' is the location in the 0th index of "jason_res" #turning to float to make calculations 
 #CALCULATE THE TOTAL CHANGES 
-	total.currDollar = round(total.BTC * total.currDollarBit, 3) #the total usd in bitcoins i have currently
+	total.currDollar = round(total.BTC * total.currDollarBit, 3) # the total usd in bitcoins i have currently
 	total.change = round(total.currDollar + total.USD, 3)
-	
 	if (total.USD == 0): 								
 		percent_change = 0
-	else:		#If i do sell enough to make 0 profit, this if-else statement will get rid of the "divide by 0 error"
+	else:		# If i do sell enough to make 0 profit, this if-else statement will get rid of the "divide by 0 error"
 		percent_change = abs(round(abs(total.change)/total.USD*100, 3))
-
 #PRINT CHANGES
 	if (total.change == 0): 
-		sys.stdout.write("$" +  str(abs(total.currDollar)) + "  |  base: $" +  str(abs(total.change)) + " " + str(abs(percent_change)) +  "%  ")
+		sys.stdout.write("$" +  str(abs(total.currDollar)) + "  |  base: $" + str(abs(total.change)) + " " + str(abs(percent_change)) + "%  |  ")
 	elif (total.change > 0):  
 		sys.stdout.write("$" +  str(abs(total.currDollar)) + "  |  gain:+$" + str(abs(total.change)) + " +" + str(abs(percent_change)) + "%  |  ")
 	elif (total.change < 0):  	
-		sys.stdout.write("$" +  str(abs(total.currDollar)) + "  |  loss:-$" + str(abs(total.change)) + " -" + str(abs(percent_change)) +  "%  |  ")	
+		sys.stdout.write("$" +  str(abs(total.currDollar)) + "  |  loss:-$" + str(abs(total.change)) + " -" + str(abs(percent_change)) + "%  |  ")	
 #Calculate Percent Change SINCE 60TH READING
 	sys.stdout.write("BTC/USD: " + str(total.currDollarBit) + "   |  ")
 	if (firstTimeRunning == True):
@@ -79,12 +76,11 @@ def calcProfits():
 	#htmlf = open('change.html', 'w') #paste the total.change onto the total.change.html file!
 	#htmlf.write(str(change))
 	#htmlf.close()
-	
 #REFRESH+ENDING:
 	total.USD = 0   
 	total.BTC = 0
 	count += 1
-	if (count == 60):       	
+	if (count == 60):
 		count = 0;
 		firstTimeRunning = True
 	t1 = time.time()
@@ -94,4 +90,5 @@ def calcProfits():
 
 while True:
 	calcProfits()
+
 	

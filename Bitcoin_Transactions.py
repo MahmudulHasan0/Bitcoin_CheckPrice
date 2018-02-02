@@ -21,9 +21,9 @@ soldBTC = 0
 
 #INPUTING MY BITCOIN EXCHANGES: [USD, BTC, USD/BTC]
 bought = [ [-100, 0.00838564, 11805.90], [-50, 0.00438647, 11170.71], [-50, 0.00433082, 11314.25], [-50, 0.00494595, 9907.10], [0, 0.001006, 10154], [-50, 0.00526249, 9311.18], [-50,0.00579132, 8460.94] ]	 
-sold   = [ [+0, -0.0]]				 #sold my BTC (-) for USD (+)
+sold   = [ [+0, -0.0]]				 	#sold my BTC (-) for USD (+)
 total = MyProfits()
-exchange = list(range(0,len(bought)))  #THIS IS FOR INDIVIDUAL EXCHANGES. WILL CONTINUE LATER IN CODE.making an array as long at the elements in the bought array
+exchange = list(range(0,len(bought)))  	#THIS IS FOR INDIVIDUAL EXCHANGES. WILL CONTINUE LATER IN CODE.making an array as long at the elements in the bought array
 for i in range(len(bought)):
 	exchange[i] = MyProfits()  
 
@@ -53,7 +53,6 @@ def calcProfits():
 		if (soldUSD == 0):		#Eliminating the "divide by 0" error when my sold array is at 0
 			exchange[i].USD_density = 1
 			exchange[i].BTC_density = 1
-
 		else:
 			exchange[i].USD_density = bought[i][0] / soldUSD    #(exhange USD)/(total USD) = density of exchange
 			exchange[i].BTC_density = bought[i][1] / soldBTC  
@@ -68,12 +67,11 @@ def calcProfits():
 			percent_change = 0 
 		else:						#Eliminating the "divide by 0" error when i sell and make 0 total profits
 			percent_change = round(abs(exchange[i].change)/exchange[i].USD*100, 2)
-		
 #PRINT CHANGES:
 		if (exchange[i].change == 0): 
 			sys.stdout.write(str(i) + ": " + str(exchange[i].USD) + " / $"  + str(abs(exchange[i].change)) + "  " + str(abs(percent_change)) + "%   |   ")
 		elif (exchange[i].change> 0):  
-			sys.stdout.write(str(i)  + ": " + str(exchange[i].USD) + " /  $+"  + str(abs(exchange[i].change)) + " +" + str(abs(percent_change)) + "%   |   ")
+			sys.stdout.write(str(i)  + ": " + str(exchange[i].USD) + " /  $ +"  + str(abs(exchange[i].change)) + " +" + str(abs(percent_change)) + "%   |   ")
 		elif (exchange[i].change< 0):  	
 			sys.stdout.write(str(i)  + ": " + str(exchange[i].USD) + " / $-"  + str(abs(exchange[i].change)) + " -" + str(abs(percent_change)) + "%   |   ")		
 		exchange[i].USD = 0  
@@ -81,8 +79,7 @@ def calcProfits():
 #PRINT TO HTML:
 	#htmlf = open('change.html', 'w') #paste the total.change onto the total.change.html file!
 	#htmlf.write(str(change))
-	#htmlf.close()
-	
+	#htmlf.close()	
 #REFRESH+ENDING:
 	total.USD = 0   
 	total.BTC = 0
