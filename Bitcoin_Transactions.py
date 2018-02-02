@@ -24,10 +24,7 @@ for i in range(len(bought)):
 
 def calcProfits():
 	t0 = time.time()
-	global firstTimeRunning
-	global count
-	global total
-	global exchange
+	global firstTimeRunning, count, total, exchange
 #CALCULATE TOTAL NUMBER OF BITCOINS I OWN AND THE TOTAL USD I SPEND ON THEM:
 	for i in range(len(bought)):
 		total.USD = total.USD + bought[i][0] 
