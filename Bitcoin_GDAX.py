@@ -7,8 +7,6 @@ import sys
 
 class MyProfits():
 	def __init__(self):
-		self.USD_input = 0	#Total USD i put into system
-		self.BTC_input = 0	#total BTC i put into system
 		self.USD = 0 		# total USD i own
 		self.BTC = 0		# total BTC i own
 		self.currDollar = 0
@@ -21,11 +19,12 @@ soldUSD = 0
 soldBTC = 0
 
 #INPUTING MY BITCOIN EXCHANGES: BOUGHT = [USD, BTC, USD/BTC]. SOLD = [USD, BTC]
-
 #bought = [ [-100, 0.00838564, 11805.90], [-50, 0.00438647, 11170.71], [-50, 0.00433082, 11314.25], [-50, 0.00494595, 9907.10], [0, 0.001006, 10154], [-50, 0.00526249, 9311.18], [-50,0.00579132, 8460.94] ]	 
 #With no coinbase $1 free:
-bought = [ [-99, 0.00838564, 11805.90], [-49, 0.00438647, 11170.71], [-49, 0.00433082, 11314.25], [-49, 0.00494595, 9907.10], [0, 0.001006, 10154], [-49, 0.00526249, 9311.18], [-49,0.00579132, 8460.94], [-38.40, +.00449406, 8523.29] ]	 
-sold   = [ [+38.40, -.00438647, 8777.94]]				 # sold my BTC (-) for USD (+)
+bought = [ [-99, 0.00838564, 11805.90], [-49, 0.00438647, 11170.71], [-49, 0.00433082, 11314.25], [-49, 0.00494595, 9907.10], [0, 0.001006, 10154], [-49, 0.00526249, 9311.18], [-49,0.00579132, 8460.94], [-38.40, 0.00449406, 8523.29] ]	 #x#buy when smaller
+sold   = [ [38.40, -.00438647, 8777.94]]## [+38.42,-0.00449406,8579.95]]				 #sell when higher ratio   #sold my BTC (-) for USD (+)
+
+
 def calcProfits():
 	t0 = time.time()
 	global firstTimeRunning, count, total, soldUSD, soldBTC
@@ -36,13 +35,16 @@ def calcProfits():
 	for i in range(len(bought)):
 		total.USD = total.USD + bought[i][0] 
 		total.BTC = total.BTC + bought[i][1]
-	if (firstTimeRunning == True):
-		sys.stdout.write("CURRENT INVESTMENT   |    G/L DOLLARS, G/L PERCENTAGE   |   BTC/USD   |   PERCENT CHANGES   ||BOUGHT:   USD:"+ str(round(total.USD,3)) + "   BTC:+"+ str(round(total.BTC,9))+"   ||SOLD:   USD:+"+str(soldUSD) + "   BTC:"+str(soldBTC)+"\n\n")
 	total.USD = total.USD + soldUSD
 	total.BTC = total.BTC + soldBTC
-#PRINT WHAT I HAVE RIGHT NOW
+
+#PRINT THE TOTAL I HAVE INPUT TO SYSTEM (BOUGHT), AND TOTAL I HAVE SOLD
 	if (firstTimeRunning == True):
-		sys.stdout.write("REMAINING IN WALLET: USD: $" + str(total.USD) + " BTC: " + str(round(total.BTC,9))+"\n\n")
+		sys.stdout.write("CURRENT INVESTMENT   |    G/L DOLLARS, G/L PERCENTAGE   |   BTC/USD   |   PERCENT CHANGES   ||BOUGHT:   USD:"+ str(round(total.USD,3)) + "   BTC:+"+ str(round(total.BTC,9))+"   ||SOLD:   USD:+"+str(soldUSD) + "   BTC:"+str(soldBTC)+"\n\n")
+#PRINT THE USD AND BTC I HAVE IN MY WALLET RIGHT NOW:	
+	
+	if (firstTimeRunning == True):
+		sys.stdout.write("REMAINING IN WALLET: USD:    $" + str(total.USD) + "   BTC: " + str(round(total.BTC,9))+"\n\n")
 		sys.stdout.write("CURRENT: \n")
 
 #GET CURRENT PRICE OF BITCOIN:
@@ -59,11 +61,11 @@ def calcProfits():
 		percent_change = abs(round(abs(total.change)/total.USD*100, 3))
 #PRINT CHANGES
 	if (total.change == 0): 
-		sys.stdout.write("$" +  str(abs(total.currDollar)) + "  |  base: $" + str(abs(total.change)) + " " + str(abs(percent_change)) + "%  |  ")
+		sys.stdout.write("$*" +  str(abs(total.currDollar)) + "  |  base: $" + str(abs(total.change)) + " " + str(abs(percent_change)) + "%  |  ")
 	elif (total.change > 0):  
-		sys.stdout.write("$" +  str(abs(total.currDollar)) + "  |  gain:+$" + str(abs(total.change)) + " +" + str(abs(percent_change)) + "%  |  ")
+		sys.stdout.write("+$" +  str(abs(total.currDollar)) + "  |  gain:+$" + str(abs(total.change)) + " +" + str(abs(percent_change)) + "%  |  ")
 	elif (total.change < 0):  	
-		sys.stdout.write("$" +  str(abs(total.currDollar)) + "  |  loss:-$" + str(abs(total.change)) + " -" + str(abs(percent_change)) + "%  |  ")	
+		sys.stdout.write("-$" +  str(abs(total.currDollar)) + "  |  loss:-$" + str(abs(total.change)) + " -" + str(abs(percent_change)) + "%  |  ")	
 #Calculate Percent Change SINCE 60TH READING
 	sys.stdout.write("BTC/USD: " + str(total.currDollarBit) + "   |  ")
 	if (firstTimeRunning == True):
