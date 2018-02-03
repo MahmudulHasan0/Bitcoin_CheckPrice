@@ -19,9 +19,11 @@ count = 0
 soldUSD = 0
 soldBTC = 0
 
-#INPUTING MY BITCOIN EXCHANGES: [USD, BTC, USD/BTC]
-bought = [ [-100, 0.00838564, 11805.90], [-50, 0.00438647, 11170.71], [-50, 0.00433082, 11314.25], [-50, 0.00494595, 9907.10], [0, 0.001006, 10154], [-50, 0.00526249, 9311.18], [-50,0.00579132, 8460.94] ]	 
-sold   = [[+0,-0.0]]#[ [+38.41, -0.00438647]]# 8772.19]]				 	#sold my BTC (-) for USD (+)
+#INPUTING MY BITCOIN EXCHANGES: BOUGHT = [USD, BTC, USD/BTC]. SOLD = [USD, BTC]
+#bought = [ [-100, 0.00838564, 11805.90], [-50, 0.00438647, 11170.71], [-50, 0.00433082, 11314.25], [-50, 0.00494595, 9907.10], [0, 0.001006, 10154], [-50, 0.00526249, 9311.18], [-50,0.00579132, 8460.94] ]	 
+#With no coinbase $1 free:
+bought = [ [-99, 0.00838564, 11805.90], [-49, 0.00438647, 11170.71], [-49, 0.00433082, 11314.25], [-49, 0.00494595, 9907.10], [0, 0.001006, 10154], [-49, 0.00526249, 9311.18], [-49,0.00579132, 8460.94], [-38.40, +.00449406, 8523.29] ]	 
+sold   = [ [0,0]]				 # sold my BTC (-) for USD (+)
 total = MyProfits()
 exchange = list(range(0,len(bought)))  	#THIS IS FOR INDIVIDUAL EXCHANGES. WILL CONTINUE LATER IN CODE.making an array as long at the elements in the bought array
 for i in range(len(bought)):
