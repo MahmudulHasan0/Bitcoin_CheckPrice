@@ -28,7 +28,7 @@ total = MyProfits()
 exchange = list(range(0,len(bought)))  	#THIS IS FOR INDIVIDUAL EXCHANGES. WILL CONTINUE LATER IN CODE.making an array as long at the elements in the bought array
 for i in range(len(bought)):
 	exchange[i] = MyProfits()  
-
+print(bought[0])
 def calcProfits():
 	t0 = time.time()
 	global firstTimeRunning, count, total, exchange, soldUSD, soldBTC
@@ -44,6 +44,7 @@ def calcProfits():
 #PRINT WHAT I HAVE RIGHT NOW
 	if (firstTimeRunning == True):
 		sys.stdout.write("CURRENT INVESTMENT   |    G/L DOLLARS, G/L PERCENTAGE   |   BTC/USD   |   PERCENT CHANGES   ||   USD: "+ str(round(total.USD,3)) + "   BTC: "+ str(round(total.BTC,8))+"   ||   USD: "+str(soldUSD) + "   BTC: "+str(soldBTC)+"\n\n")
+
 #GET CURRENT PRICE OF BITCOIN:
 	url = 'https://api.gdax.com/products/BTC-USD/trades'
 	res = requests.get(url)
@@ -58,17 +59,19 @@ def calcProfits():
 		else:
 			exchange[i].USD_density = bought[i][0] / soldUSD    #(exhange USD)/(total USD) = density of exchange
 			exchange[i].BTC_density = bought[i][1] / soldBTC  
-		exchange[i].USD = round(abs(bought[i][0] - (exchange[i].USD_density)*soldUSD),2) #SUBTRACTING THE SELL FROM EACH EXCHANGE
+		exchange[i].USD = round(abs(bought[i][0] - (exchange[i].USD_density)*soldUSD),3) #SUBTRACTING THE SELL FROM EACH EXCHANGE
 		exchange[i].BTC = round(abs(bought[i][1] - (exchange[i].BTC_density)*soldBTC),8) #SUBTRACTING THE SELL FROM EACH EXCHANGE
-		exchange[i].currDollar = round(exchange[i].BTC * total.currDollarBit, 2)	
-		exchange[i].change = round(exchange[i].currDollar - exchange[i].USD, 2)	
+		exchange[i].currDollar = round(exchange[i].BTC * total.currDollarBit, 3)	
+		exchange[i].change = round(exchange[i].currDollar - exchange[i].USD, 3)	
+
 #FIXING A FEW ERRORS:		
 		if (exchange[i].USD == 0):	#Eliminating the "divide by 0" error when i sell and make 0 total profits
 			exchange[i].USD = 1
 		if (bought[i][0] == 0): 	#Print purposes only, not important, just says that when i get free BTC (meaning 0 USD) it will say 0%							
 			percent_change = 0 
 		else:						#Eliminating the "divide by 0" error when i sell and make 0 total profits
-			percent_change = round(abs(exchange[i].change)/exchange[i].USD*100, 2)
+			percent_change = round(abs(exchange[i].change)/exchange[i].USD*100, 3)
+
 #PRINT CHANGES:
 		if (exchange[i].change == 0): 
 			sys.stdout.write(str(i) + ": " + str(exchange[i].USD) + " / $"  + str(abs(exchange[i].change)) + "  " + str(abs(percent_change)) + "%   |   ")
