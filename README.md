@@ -30,4 +30,6 @@ This will help me recalculate how much USD and bitcoins I have in my wallet
 Gains/losses are calculated using the **investment** array. The investment array take in three factors: The amount of money in USD you put into the system (this is the initial investment. It is not really need anymore), the amount of bitcoins you have bought with that initial investment, and the USD per one BTC price you bought the bitcoins for. The number of bitcoins bought, USD per one Bitcoin price, and the GDAX or Coibase fees can calculate the initial USD investment 9thats why the USD investment index isnt really needed, will get rid of it in the future).
 
 
-**investment = [ [-<USD you put into system>, <bought bitcoins>, <USD per one BTC price you bough bitcoins for>] ]**
+'''
+investment = [ [-<USD you put into system>, <bought bitcoins>, <USD per one BTC price you bough bitcoins for>] ]
+'''
