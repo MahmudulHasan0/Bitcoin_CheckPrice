@@ -1,5 +1,5 @@
 #INDIVIDUAL TRANSACTION BTC CHECKER
-#Bitcoin_GDAX.py is the main program
+#Bitcoin_Total.py is the main program
 import requests
 import json
 import time		
