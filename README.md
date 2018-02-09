@@ -4,18 +4,12 @@ Both programs will scrape the current bitcoin price from GDAX every second and t
 
 **"Bitcoin_GDAX.py" will:**
         1) output how much USD I currently have in bitcoins.
-	
 	2) output how much money (in USD) I'm gaining/losing in the current bitcoin market.
-	
 	3) outputs the percent gain/loss (USD).
-	
 	4) output the current bitcoin/USD rate.
 	5) store the current bitcoin price in a variable and will calculate the percent gain/loss from this amount. 
-	
 	The variable will reset after 60 runs. After 60 runs, this variable will then be reassigned to the newest price. 
-	
 	Will eventually use this to make a graph and store that graph in a database. 
-	
 	6) When I sell bitcoins, it will take in dollars I have gained and the bitcoins I have lost and then recalculate the total USD and bitcoin I currently have
 
 **"Bitcoin.Transactions.py" will:**
