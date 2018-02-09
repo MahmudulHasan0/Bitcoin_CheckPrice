@@ -1,8 +1,8 @@
-**Two Programs: "Bitcoin_Exchanges.py" and "Bitcoin.Transactions.py"**
+**Two Programs: "Bitcoin_Total.py" and "Bitcoin.Transactions.py"**
 
 Both programs will scrape the current bitcoin price from GDAX every second and then calculate how much money in US dollars and bitcoin I'm gaining/losing. 
 
-**"Bitcoin_Exchanges.py" will:**
+**"Bitcoin_Total.py" will:**
 
 1) output how much USD I currently have in bitcoins.
 2) output how much money (in USD) I'm gaining/losing in the current bitcoin market.
