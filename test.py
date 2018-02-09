@@ -1,4 +1,4 @@
-#latest
+#latest. testing buy/sell array 
 #current BTC WALLET CHECKER
 #Next Strategies: python write to a file. get html to read from that file and refresh every second
 import requests
