@@ -1,4 +1,5 @@
 **Two Programs: "Bitcoin_Total.py" and "Bitcoin.Individual.py"**
+**This is program is still being worked on. Here is what the current code does:**
 
 Both programs will scrape the current bitcoin price from GDAX every second and then calculate how much money in US dollars and bitcoin I'm gaining/losing. 
 
@@ -24,4 +25,9 @@ For example, If I first buy bitcoins with $100 (this will be the first exchange)
 Then the density of the first exchange is 1/3. Using this I will subtract the total USD gained from selling bitcoins from each exchange.
 This will help me recalculate how much USD and bitcoins I have in my wallet
 
+**INPUTING YOUR DATA:**
+**for Bitcoin_Total.py:**
+Gains/losses are calculated using the **investment** array. The investment array take in three factors: The amount of money in USD you put into the system (this is the initial investment. It is not really need anymore), the amount of bitcoins you have bought with that initial investment, and the USD per one BTC price you bought the bitcoins for. The number of bitcoins bought, USD per one Bitcoin price, and the GDAX or Coibase fees can calculate the initial USD investment 9thats why the USD investment index isnt really needed, will get rid of it in the future).
 
+SYNTAX: 
+investment = [ [-<USD you put into system>, <bought bitcoins>, <USD per one BTC price you bough bitcoins for>] ]
