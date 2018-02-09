@@ -44,7 +44,7 @@ def calcProfits():
 #PRINT THE USD AND BTC I HAVE IN MY WALLET RIGHT NOW:	
 	if (firstTimeRunning == True):
 		sys.stdout.write("REMAINING IN WALLET: BTC: " + str(round(total.BTC,9)) + "    in USD:    $" + str(-total.USD) +"\n\n")
-		sys.stdout.write("CURRENT: \n")
+		sys.stdout.write("CURRENT (in BTC to USD): \n")
 #GET CURRENT PRICE OF BITCOIN:
 	url = 'https://api.gdax.com/products/BTC-USD/trades'
 	res = requests.get(url)
