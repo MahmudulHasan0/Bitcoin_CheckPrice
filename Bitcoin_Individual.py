@@ -1,5 +1,5 @@
 #INDIVIDUAL TRANSACTION BTC CHECKER
-#Bitcoin_GDAX.py is the main program
+#Bitcoin_Total.py is the main program
 import requests
 import json
 import time		
@@ -18,9 +18,6 @@ firstTimeRunning = True
 count = 0
 soldUSD = 0
 soldBTC = 0
-#INPUTING MY BITCOIN EXCHANGES: BOUGHT = [USD, BTC, USD/BTC]. SOLD = [USD, BTC]
-#bought = [ [-100, 0.00838564, 11805.90], [-50, 0.00438647, 11170.71], [-50, 0.00433082, 11314.25], [-50, 0.00494595, 9907.10], [0, 0.001006, 10154], [-50, 0.00526249, 9311.18], [-50,0.00579132, 8460.94] ]	 
-#With no coinbase $1 free:
 bought = [ [-99, 0.00838564, 11805.90], [-49, 0.00433082, 11314.25], [-49, 0.00438647, 11170.71], [-49, 0.00494595, 9907.10],  [-49, 0.00526249, 9311.18], [-49,0.00579132, 8460.94], [0, 0.001006, 10154], [-38.40, 0.00449406, 8523.29] ]	 #x #BTC Important   #[lower,greater, lower]   #official 
 sold   = [ [0,0]]#+38.42,-0.00449406,8579.95]]				 #sell when higher ratio   #sold my BTC (-) for USD (+)
 
