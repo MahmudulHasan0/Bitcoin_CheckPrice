@@ -94,5 +94,3 @@ def calcProfits():
 
 while True:
 	calcProfits()
-
-	
