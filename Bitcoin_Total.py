@@ -7,7 +7,7 @@ import sys
 #INPUTING MY BITCOIN EXCHANGES: investment = [USD, BTC, USD/BTC]
 investment = [ [-100, 0.00838564, 11805.90], [-50, 0.00433082, 11314.25], [-50, 0.00438647, 11170.71], [-50, 0.00494595, 9907.10], [-50, 0.00526249, 9311.18], [-50, .00579132, 8460.94], [-50, 0.00723745, 6605.92], [0, 0.001006, 10154], [-50, 0.00511541, 9750.01] ]
 sold = [[0,0,0]]						 
-myCurrentBTC = 0.04416541
+inWallet = [0, 0.04416541]  #What I have in my wallets right now:  [current USD from selling BTC, current BTC]
 
 class MyProfits():
 	def __init__(self):
@@ -35,7 +35,7 @@ for i in range(len(sold)):
 
 def calcProfits():
 	t0 = time.time()
-	global firstTimeRunning, count, input, current, each, soldUSD, soldBTC, myCurrentBTC
+	global firstTimeRunning, count, input, current, each, soldUSD, soldBTC, inWallet
 #1) PRINT THE input I HAVE input TO SYSTEM (investment), AND input I HAVE SOLD
 	if (firstTimeRunning == True):
 		sys.stdout.write("CURRENT INVESTMENT   |    G/L DOLLARS, G/L PERCENTAGE   |   BTC/USD   |   PERCENT CHANGES   ||input:   USD:"+ str(round(input.USD,3)) + "   BTC:+"+ str(round(input.BTC,9))+"   ||SOLD:   USD:+"+str(soldUSD) + "   BTC:"+str(soldBTC)+"\n\n")
@@ -51,7 +51,7 @@ def calcProfits():
 		each.USD = investment[i][1]*current.dollarBit
 		each.gainLossArray.append(investment[i][0]+each.USD) 	#CALCULATE THE GAIN/LOSS OF EACH INVESTMENT, AND PUT IT IN ARRAY (WILL BE USED TO EVALUATES GAINS/LOSSES OF EACH INVESTMENT)
 		input.gainLoss = input.gainLoss + each.gainLossArray[i] #gain loss using the inputs
-	current.BTC = myCurrentBTC
+	current.BTC = inWallet[1]+inWallet[0]/current.dollarBit     #the total BTC in my wallet. If i have USD in the wallet, it turns into BTC
 	current.USD = round(current.BTC * current.dollarBit,3)
 	current.gainLoss = round(input.USD + current.USD,3)
 	current.gainLossPercent = round(current.gainLoss/450*100,3)
