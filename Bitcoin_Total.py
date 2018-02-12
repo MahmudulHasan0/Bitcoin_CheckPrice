@@ -12,8 +12,8 @@ inWallet = [107.56, 0.04416541-.01270184]  #What I have in my wallets right now:
 class MyProfits():
 	def __init__(self):
 		self.BTC = 0
-		self.BTCtoUSD = 0 	#$ in BTC
-		self.totalUSD = 0	#everything converted to USD
+		self.BTCtoUSD = 0 
+		self.totalUSD = 0	
 		self.dollarBit = 0
 		self.gainLoss = 0
 		self.gainLossArray = []
@@ -39,13 +39,13 @@ def calcProfits():
 	global firstTimeRunning, count, input, current, each, soldUSD, soldBTC, inWallet
 #1) PRINT THE input I HAVE input TO SYSTEM (investment), AND input I HAVE SOLD
 	if (firstTimeRunning == True):
-		sys.stdout.write("CURRENT INVESTMENT   |    G/L DOLLARS, G/L PERCENTAGE   |   BTC/BTCtoUSD   |   PERCENT CHANGES   ||input:   USD:"+ str(round(input.totalUSD,3)) + "   BTC:+"+ str(round(input.BTC,9))+"   ||SOLD:   BTCtoUSD:+"+str(soldUSD) + "   BTC:"+str(soldBTC)+"\n\n")
+		sys.stdout.write("CURRENT INVESTMENT   |    G/L DOLLARS, G/L PERCENTAGE   |   BTC/BTCtoUSD   |   PERCENT CHANGES   ||input:   BTCtoUSD:"+ str(round(input.totalUSD,3)) + "   BTC:+"+ str(round(input.BTC,9))+"   ||SOLD:   BTCtoUSD:+"+str(soldUSD) + "   BTC:"+str(soldBTC)+"\n\n")
 
 #2) GET CURRENT PRICE OF BITCOIN:
 	url = 'https://api.gdax.com/products/BTC-BTCtoUSD/trades'
 	res = requests.get(url)
 	json_res = json.loads(res.text) 					 
-	current.dollarBit =  float(json_res[0]['price'])   
+	current.dollarBit =  8465.0#float(json_res[0]['price'])   
 #$373.86  
 #-$76.14
 #3) CALCULATE CURRENT BTCtoUSD AND BTC AND CURRENT LOSSES/GAINS:
@@ -57,7 +57,12 @@ def calcProfits():
 	current.BTCtoUSD = round(current.BTC * current.dollarBit,3)		#Turning the BTC to USD
 	current.totalUSD = inWallet[0] + current.BTCtoUSD 				#Basically turning everything in wallet to USD
 	current.gainLoss = round(input.totalUSD + current.totalUSD,3)
-	current.gainLossPercent = round(current.gainLoss/input.totalUSD*100,3)
+	print("-------------------------")
+	print(input.totalUSD)
+	print(current.BTCtoUSD)
+	print(current.totalUSD)
+	print("------------------")
+	current.gainLossPercent = round(current.gainLoss/tota*100,3)
 
 #4) PRINT THE BTCtoUSD AND BTC I HAVE IN MY WALLET RIGHT NOW:	
 	if (firstTimeRunning == True):
