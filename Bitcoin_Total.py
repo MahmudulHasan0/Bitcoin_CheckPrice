@@ -40,7 +40,7 @@ def calcProfits():
 	global firstTimeRunning, count, input, current, each, soldUSD, soldBTC, inWallet
 #1) PRINT THE input I HAVE input TO SYSTEM (investment), AND input I HAVE SOLD
 	if (firstTimeRunning == True):
-		sys.stdout.write("CURRENT INVESTMENT   |    G/L DOLLARS, G/L PERCENTAGE   |   BTC/BTCtoUSD   |   PERCENT CHANGES   ||input:   USD:"+ str(round(input.totalUSD,3)) + "   BTC:+"+ str(round(input.BTC,9))+"   ||SOLD:   BTCtoUSD:+"+str(soldUSD) + "   BTC:"+str(soldBTC)+"\n\n")
+		sys.stdout.write("CURRENT INVESTMENT   |    G/L DOLLARS, G/L PERCENTAGE   |   BTC/BTCtoUSD   |   PERCENT CHANGES   ||input:   USD:"+ str(round(input.totalUSD,3)) + "   BTC:"+ str(round(input.BTC,9))+"   ||SOLD:   BTCtoUSD:+"+str(soldUSD) + "   BTC:"+str(soldBTC)+"\n\n")
 #2) GET CURRENT PRICE OF BITCOIN:
 	url = 'https://api.gdax.com/products/BTC-USD/trades'
 	res = requests.get(url)
@@ -55,8 +55,7 @@ def calcProfits():
 		each.BTCtoUSD = investment[i][1]*current.dollarBit
 		each.gainLossArray.append(investment[i][0]-each.BTCtoUSD) 	#CALCULATE THE GAIN/LOSS OF EACH INVESTMENT, AND PUT IT IN ARRAY (WILL BE USED TO EVALUATES GAINS/LOSSES OF EACH INVESTMENT)
 		input.gainLoss = input.gainLoss + each.gainLossArray[i] 	#Gain/loss using the inputs
-	current.BTC = inWallet[1]          								#The total BTC in my wallet. 
-	current.BTCtoUSD = round(current.BTC * current.dollarBit,3)		#Turning the BTC to USD
+	current.BTCtoUSD = round(inWallet[1] * current.dollarBit,3)		#Turning the BTC to USD
 	current.totalUSD = inWallet[0] + current.BTCtoUSD 				#Basically turning everything in wallet to USD
 	current.gainLoss = -round(input.totalUSD - current.totalUSD,3)
 	current.gainLossPercent = round(current.gainLoss/input.totalUSD*100,3)
@@ -64,8 +63,8 @@ def calcProfits():
 
 #4) PRINT THE BTCtoUSD AND BTC I HAVE IN MY WALLET RIGHT NOW:	
 	if (firstTimeRunning == True):
-		sys.stdout.write("REMAINING IN WALLET: BTC: " + str(round(current.BTC,9)) + "    in BTCtoUSD:    $" + str(current.totalUSD) +"\n\n")
-		sys.stdout.write("CURRENTLY HAVE: (in BTC to BTCtoUSD) \n")
+		sys.stdout.write("REMAINING IN WALLET:    BTC: " + str(round(inWallet[1],9)) + "--> $" + str(current.BTCtoUSD) + "         USD: "+str(inWallet[0])+"\n\n")
+		sys.stdout.write("CURRENTLY HAVE: (all converted to USD) \n")
 
 #5) PRINT PERCENT CHANGES
 	if (current.gainLoss == 0): 
@@ -76,7 +75,7 @@ def calcProfits():
 		sys.stdout.write("$" +  str(abs(current.totalUSD)) + "  |  loss:-$" + str(abs(current.gainLoss)) + " -" + str(abs(current.gainLossPercent)) + "%  |  ")	
 
 #Calculate Percent Change SINCE 60TH READING
-	sys.stdout.write("BTC/BTCtoUSD: " + str(current.dollarBit) + "   |  ")
+	sys.stdout.write("BTC/USD: $" + str(current.dollarBit) + "   |  ")
 	if (firstTimeRunning == True):
 		firstTimeRunning = False	
 		current.gainLoss_prev = current.gainLoss
