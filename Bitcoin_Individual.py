@@ -1,99 +1,52 @@
-#INDIVIDUAL TRANSACTION BTC CHECKER
-#Bitcoin_Total.py is the main program
+#input BTC CHECKER: input profit/loss calculator
 import requests
 import json
 import time		
 import sys		
 
+#INPUTING MY BITCOIN EXCHANGES: investment = [BTCtoUSD, BTC, BTCtoUSD/BTC]
+investment = [ [-100, 0.00838564, 11805.90], [-50, 0.00433082, 11314.25], [-50, 0.00438647, 11170.71], [-50, 0.00494595, 9907.10], [-50, 0.00526249, 9311.18], [-50, .00579132, 8460.94], [-50, 0.00723745, 6605.92], [0, 0.001006, 10154], [-50, 0.00511541, 9750.01] ]
+sold = [[0,0,0]]						 
+inWallet = [107.56, 0.04416541-.01270184]  #What I have in my wallets right now:  [current BTCtoUSD from selling BTC, current BTC]
+
 class MyProfits():
 	def __init__(self):
-		self.BTC = 0		#total BTC i own
-		self.USD = 0		#total USD i own
-		self.currDollar = 0
-		self.change = 0
-		self.change_prev = 0
-		self.USD_density = 0
-		self.BTC_density = 0
+		self.BTC = 0
+		self.BTCtoUSD = 0 	#$ in BTC
+		self.totalUSD = 0	#everything converted to USD
+		self.dollarBit = 0
+		self.gainLoss = 0
+		self.gainLossArray = []
+		self.gainLossPercent = 0
+		self.gainLoss_prev = 0
 firstTimeRunning = True
+input = MyProfits()		#object for all initial investment. BTCtoUSD i inputted to system
+current = MyProfits()	#current BTCtoUSD, BTC i have with the market
+each = MyProfits()		#object for each investment
 count = 0
-soldUSD = 0
+soldBTCtoUSD = 0
 soldBTC = 0
-bought = [ [-99, 0.00838564, 11805.90], [-49, 0.00433082, 11314.25], [-49, 0.00438647, 11170.71], [-49, 0.00494595, 9907.10],  [-49, 0.00526249, 9311.18], [-49,0.00579132, 8460.94], [0, 0.001006, 10154], [-38.40, 0.00449406, 8523.29] ]	 #x #BTC Important   #[lower,greater, lower]   #official 
-sold   = [ [0,0]]#+38.42,-0.00449406,8579.95]]				 #sell when higher ratio   #sold my BTC (-) for USD (+)
 
-total = MyProfits()
-exchange = list(range(0,len(bought)))  	#THIS IS FOR INDIVIDUAL EXCHANGES. WILL CONTINUE LATER IN CODE.making an array as long at the elements in the bought array
-for i in range(len(bought)):
-	exchange[i] = MyProfits()  
-print(bought[0])
+for i in range(len(investment)):
+	input.totalUSD = input.totalUSD + investment[i][0] 
+	input.BTC = input.BTC + investment[i][1]
+for i in range(len(sold)):
+	soldUSD = sold[i][0]
+	soldBTC = sold[i][1]
+
+
 def calcProfits():
 	t0 = time.time()
-	global firstTimeRunning, count, total, exchange, soldUSD, soldBTC
-#CALCULATE TOTAL NUMBER OF BTC I OWN AND THE TOTAL USDed I SPEND ON THEM + SOLD BTC:
-	for i in range(len(sold)):
-		soldUSD = sold[i][0]
-		soldBTC = sold[i][1]
-	for i in range(len(bought)):
-		total.USD = total.USD + bought[i][0] 
-		total.BTC = total.BTC + bought[i][1]
-	total.USD = total.USD + soldUSD
-	total.BTC = total.BTC + soldBTC 
-#PRINT WHAT I HAVE RIGHT NOW
+	global firstTimeRunning, count, input, current, each, soldUSD, soldBTC, inWallet
+#1) PRINT THE input I HAVE input TO SYSTEM (investment), AND input I HAVE SOLD
 	if (firstTimeRunning == True):
-		sys.stdout.write("CURRENT INVESTMENT   |    G/L DOLLARS, G/L PERCENTAGE   |   BTC/USD   |   PERCENT CHANGES   ||   USD: "+ str(round(total.USD,3)) + "   BTC: "+ str(round(total.BTC,8))+"   ||   USD: "+str(soldUSD) + "   BTC: "+str(soldBTC)+"\n\n")
-
+		sys.stdout.write("CURRENT INVESTMENT   |    G/L DOLLARS, G/L PERCENTAGE   |   BTC/BTCtoUSD   |   PERCENT CHANGES   ||input:   USD:"+ str(round(input.totalUSD,3)) + "   BTC:+"+ str(round(input.BTC,9))+"   ||SOLD:   BTCtoUSD:+"+str(soldUSD) + "   BTC:"+str(soldBTC)+"\n\n")
 #GET CURRENT PRICE OF BITCOIN:
 	url = 'https://api.gdax.com/products/BTC-USD/trades'
 	res = requests.get(url)
 	json_res = json.loads(res.text) 			
-	total.currDollarBit = float(json_res[0]['price'])  
-#CALCULATE THE CURRENT USD VALUE OF BTC FOR EACH TRANSACTION I MADE 
-	for i in range(len(bought)):
-#*SUBTRACTING MY BUYS FROM THE EXCHANGES USING A RATIO OF EXCHANGE/TOTAL
-		if (soldUSD == 0):		#Eliminating the "divide by 0" error when my sold array is at 0
-			exchange[i].USD_density = 1
-			exchange[i].BTC_density = 1
-		else:
-			exchange[i].USD_density = bought[i][0] / soldUSD    #(exhange USD)/(total USD) = density of exchange
-			exchange[i].BTC_density = bought[i][1] / soldBTC  
-		exchange[i].USD = round(abs(bought[i][0] - (exchange[i].USD_density)*soldUSD),3) #SUBTRACTING THE SELL FROM EACH EXCHANGE
-		exchange[i].BTC = round(abs(bought[i][1] - (exchange[i].BTC_density)*soldBTC),8) #SUBTRACTING THE SELL FROM EACH EXCHANGE
-		exchange[i].currDollar = round(exchange[i].BTC * total.currDollarBit, 3)	
-		exchange[i].change = round(exchange[i].currDollar - exchange[i].USD, 3)	
-
-#FIXING A FEW ERRORS:		
-		if (exchange[i].USD == 0):	#Eliminating the "divide by 0" error when i sell and make 0 total profits
-			exchange[i].USD = 1
-		if (bought[i][0] == 0): 	#Print purposes only, not important, just says that when i get free BTC (meaning 0 USD) it will say 0%							
-			percent_change = 0 
-		else:						#Eliminating the "divide by 0" error when i sell and make 0 total profits
-			percent_change = round(abs(exchange[i].change)/exchange[i].USD*100, 3)
-
-#PRINT CHANGES:
-		if (exchange[i].change == 0): 
-			sys.stdout.write(str(i) + ": " + str(exchange[i].USD) + " / $"  + str(abs(exchange[i].change)) + "  " + str(abs(percent_change)) + "%   |   ")
-		elif (exchange[i].change> 0):  
-			sys.stdout.write(str(i)  + ": " + str(exchange[i].USD) + " /  $ +"  + str(abs(exchange[i].change)) + " +" + str(abs(percent_change)) + "%   |   ")
-		elif (exchange[i].change< 0):  	
-			sys.stdout.write(str(i)  + ": " + str(exchange[i].USD) + " / $-"  + str(abs(exchange[i].change)) + " -" + str(abs(percent_change)) + "%   |   ")		
-		exchange[i].USD = 0  
-		exchange[i].BTC = 0
-	sys.stdout.write("T: "+str(exchange[5].change+exchange[7].change) +"  ")
-#PRINT TO HTML:
-	#htmlf = open('change.html', 'w') #paste the total.change onto the total.change.html file!
-	#htmlf.write(str(change))
-	#htmlf.close()	
-#REFRESH+ENDING:
-	total.USD = 0   
-	total.BTC = 0
-	count += 1
-	firstTimeRunning = False
-	if (count == 60):       	
-		count = 0;
-		firstTimeRunning = True
-	t1 = time.time()
-	total_time = round((t1-t0),3)
-	sys.stdout.write("    " + str(total_time)+" sec     Loop:" + str(count) + "\n")
+	current.currDollarBit = float(json_res[0]['price'])  
+	print(current.currDollarBit)
 	time.sleep(1)
 	
 while True:

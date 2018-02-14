@@ -7,7 +7,7 @@ import sys
 #INPUTING MY BITCOIN EXCHANGES: investment = [BTCtoUSD, BTC, BTCtoUSD/BTC]
 investment = [ [-100, 0.00838564, 11805.90], [-50, 0.00433082, 11314.25], [-50, 0.00438647, 11170.71], [-50, 0.00494595, 9907.10], [-50, 0.00526249, 9311.18], [-50, .00579132, 8460.94], [-50, 0.00723745, 6605.92], [0, 0.001006, 10154], [-50, 0.00511541, 9750.01] ]
 sold = [[0,0,0]]						 
-inWallet = [107.56, 0.04416541-.01270184]  #What I have in my wallets right now:  [current BTCtoUSD from selling BTC, current BTC]
+inWallet = [107.56, (0.04416541-.01270184)]  #What I have in my wallets right now:  [current BTCtoUSD from selling BTC, current BTC]
 
 class MyProfits():
 	def __init__(self):
@@ -34,18 +34,20 @@ for i in range(len(sold)):
 	soldUSD = sold[i][0]
 	soldBTC = sold[i][1]
 
+
 def calcProfits():
 	t0 = time.time()
 	global firstTimeRunning, count, input, current, each, soldUSD, soldBTC, inWallet
 #1) PRINT THE input I HAVE input TO SYSTEM (investment), AND input I HAVE SOLD
 	if (firstTimeRunning == True):
 		sys.stdout.write("CURRENT INVESTMENT   |    G/L DOLLARS, G/L PERCENTAGE   |   BTC/BTCtoUSD   |   PERCENT CHANGES   ||input:   USD:"+ str(round(input.totalUSD,3)) + "   BTC:+"+ str(round(input.BTC,9))+"   ||SOLD:   BTCtoUSD:+"+str(soldUSD) + "   BTC:"+str(soldBTC)+"\n\n")
-
 #2) GET CURRENT PRICE OF BITCOIN:
-	url = 'https://api.gdax.com/products/BTC-BTCtoUSD/trades'
+	url = 'https://api.gdax.com/products/BTC-USD/trades'
 	res = requests.get(url)
-	json_res = json.loads(res.text) 					 
-	current.dollarBit =  float(json_res[0]['price'])   
+	json_res = json.loads(res.text) 			
+	current.currDollarBit = float(json_res[0]['price'])  
+
+	
 #$373.86  
 #-$76.14
 #3) CALCULATE CURRENT BTCtoUSD AND BTC AND CURRENT LOSSES/GAINS:
@@ -100,7 +102,7 @@ def calcProfits():
 	t1 = time.time()
 	input_time = round((t1-t0),3)
 	sys.stdout.write("  |            " + str(input_time)+" sec        " + str(count) + "\n")
-	time.sleep(2)	
+	time.sleep(2 )	
 
 while True:
 	calcProfits()
