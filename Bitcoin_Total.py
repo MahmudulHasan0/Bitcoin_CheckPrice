@@ -58,19 +58,10 @@ def calcProfits():
 	current.BTC = inWallet[1]          								#The total BTC in my wallet. 
 	current.BTCtoUSD = round(current.BTC * current.dollarBit,3)		#Turning the BTC to USD
 	current.totalUSD = inWallet[0] + current.BTCtoUSD 				#Basically turning everything in wallet to USD
-	print("//////////////")
-
-	print(current.BTC)
-	print(current.dollarBit)
-	print(current.BTCtoUSD)
-	print(inWallet[0])
-	print()
-	
-	current.gainLoss = round(input.totalUSD - current.totalUSD,3)
+	current.gainLoss = -round(input.totalUSD - current.totalUSD,3)
 	current.gainLossPercent = round(current.gainLoss/input.totalUSD*100,3)
 
-	print(input.totalUSD)
-	print(current.totalUSD)
+
 #4) PRINT THE BTCtoUSD AND BTC I HAVE IN MY WALLET RIGHT NOW:	
 	if (firstTimeRunning == True):
 		sys.stdout.write("REMAINING IN WALLET: BTC: " + str(round(current.BTC,9)) + "    in BTCtoUSD:    $" + str(current.totalUSD) +"\n\n")
