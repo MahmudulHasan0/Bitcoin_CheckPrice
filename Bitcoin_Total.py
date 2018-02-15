@@ -7,7 +7,7 @@ import sys
 #INPUTING MY BITCOIN EXCHANGES: investment = [BTCtoUSD, BTC, BTCtoUSD/BTC]
 investment = [ [100, 0.00838564, 11805.90], [50, 0.00433082, 11314.25], [50, 0.00438647, 11170.71], [50, 0.00494595, 9907.10], [50, 0.00526249, 9311.18], [50, .00579132, 8460.94], [50, 0.00723745, 6605.92], [0, 0.001006, 10154], [50, 0.00511541, 9750.01] ]
 sold = [[0,0,0]]						 
-inWallet = [107.56, (0.04416541-.01270184)]  #What I have in my wallets right now:  [current BTCtoUSD from selling BTC, current BTC]
+inWallet = [130.04, 0.02852339]  #What I have in my wallets right now:  [current BTCtoUSD from selling BTC, current BTC]
 
 class MyProfits():
 	def __init__(self):
@@ -102,7 +102,7 @@ def calcProfits():
 	t1 = time.time()
 	input_time = round((t1-t0),3)
 	sys.stdout.write("  |            " + str(input_time)+" sec        " + str(count) + "\n")
-	time.sleep(2 )	
+	time.sleep(4)	
 
 while True:
 	calcProfits()
