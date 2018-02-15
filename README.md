@@ -27,8 +27,12 @@ This will help me recalculate how much USD and bitcoins I have in my wallet
 
 **INPUTTING YOUR DATA:**
 **for Bitcoin_Total.py:**
-Gains/losses are calculated using the **investment** array. The investment array takes in three factors: The amount of money in USD you put into the system (this is the initial investment. It's not need anymore), the number of bitcoins you have bought with that initial investment, and the USD per one BTC price you bought the bitcoins for. The number of bitcoins bought, USD per one Bitcoin price, and the GDAX or Coinbase fees can calculate the initial USD investment 9thats why the USD investment index isn't really needed, will get rid of it in the future).
-
+Gains/losses are calculated using the **investment** and **inWallet** arrays. 
+The **investment** array is what you initially put into the market. It takes in three factors: The amount of money in USD you put into the system (this is the initial investment. It's not need anymore), the number of bitcoins you have bought with that initial investment, and the USD per one BTC price you bought the bitcoins for. The number of bitcoins bought, USD per one Bitcoin price, and the GDAX or Coinbase fees can calculate the initial USD investment 9thats why the USD investment index isn't really needed, will get rid of it in the future).
+The **inWallet** array is how much bitcoins and US dollars you have in your account. The program will turn the bitcoins into dollars and will then calculate your gain/loss from your initial investment (in dollars).
 ```
-investment = [ [-<USD you put into system>, <bought bitcoins>, <USD per one BTC price you bought bitcoins for>] ]
+investment = [ [<USD you put into system>, <bought bitcoins>, <USD per one BTC price you bought bitcoins for>] ]
+```
+```
+inWallet = [ [<USD in your account>, <Bitcoins in your account>] ]
 ```
