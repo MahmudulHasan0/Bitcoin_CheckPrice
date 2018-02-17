@@ -14,9 +14,8 @@ The variable will reset after 60 runs. After 60 runs, this variable will then be
 Will eventually use this to make a graph and store that graph in a database. 
 6) When I sell bitcoins, it will take in dollars I have gained and the bitcoins I have lost and then recalculate the total USD and bitcoin I currently have
 
-**"B) Bitcoin.Individual.py" will:**
+**"B) Bitcoin.Individual.py" will:** (Will Need To Fix)
 
-[Will Need To Fix]
 1) output how much money in USD I traded in for bitcoin for each exchange.
 2) outputs how much money (in USD) I'm gaining/losing per exchange.
 3) outputs the percent gain/loss (USD) of that exchange.
