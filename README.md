@@ -1,7 +1,5 @@
 * Bitcoin_Total.py is the main program
-
 * Bitcoin_Individual.py is mostly a test program that isnt really important
-
 * Both programs will scrape the current bitcoin price from GDAX every few seconds and then calculate how much money in US dollars I'm gaining or losing. 
 
 **A) Bitcoin_Total.py will:**
@@ -26,11 +24,8 @@ Then the density of the first exchange is 1/3. Using this I will subtract the to
 This will help me recalculate how much USD and bitcoins I have in my wallet
 
 **C) INPUTTING YOUR DATA: For Bitcoin_Total.py:**
-
 * Gains/losses are calculated using the **investment** and **inWallet** arrays. 
-
 * The **investment** array is what you initially put into the market. It takes in three factors: The amount of money in USD you put into the system (this is the initial investment. It's not need anymore), the number of bitcoins you have bought with that initial investment, and the USD per one BTC price you bought the bitcoins for. The number of bitcoins bought, USD per one Bitcoin price, and the GDAX or Coinbase fees can calculate the initial USD investment 9thats why the USD investment index isn't really needed, will get rid of it in the future).
-
 * The **inWallet** array is how much bitcoins and US dollars you have in your account. The program will turn the bitcoins into dollars and will then calculate your gain/loss from your initial investment (in dollars).
 
 ```
