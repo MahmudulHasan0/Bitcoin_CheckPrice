@@ -4,9 +4,9 @@ import json
 import time		
 import sys		
 
-#INPUTING MY EXCHANGES: investment = [USD input, BTC, USD/BTC]
+#INPUTING MY EXCHANGES: 
 investment = [ [100, 0.00838564, 11805.90], [50, 0.00433082, 11314.25], [50, 0.00438647, 11170.71], [50, 0.00494595, 9907.10], [50, 0.00526249, 9311.18], [50, .00579132, 8460.94], [50, 0.00723745, 6605.92], [0, 0.001006, 10154], [50, 0.00511541, 9750.01] ]					 
-inWallet = [51.6, (0.02204888+0.01435868)]  #What I have in my wallets right now:  [current BTCtoUSD from selling BTC, current BTC]
+inWallet = [51.6, (0.02204888+0.01423482)]  #What I have in my wallets right now
 
 class MyProfits():
 	def __init__(self):
@@ -33,7 +33,7 @@ def calcProfits():
 	global firstTimeRunning, count, input, current, each, inWallet
 #1) PRINT THE input I HAVE input TO SYSTEM (investment), AND input I HAVE SOLD
 	if (firstTimeRunning == True):
-		sys.stdout.write("CURRENT MONEY   |    G/L DOLLARS, G/L PERCENTAGE   |   USD/BTC   |   PERCENT CHANGES   |   INITIAL:  INPUT-USD: $"+ str(round(input.totalUSD,3)) + "   GOTTEN-BTC: "+ str(round(input.BTC,9))+"\n\n")
+		sys.stdout.write("CURRENT MONEY   |    G/L DOLLARS, G/L PERCENTAGE   |   USD/BTC   |   PERCENT CHANGES   |   INITIAL:  INPUT-USD: $"+ str(round(input.totalUSD,3)) + "   GOTTEN-BTC: " + str(round(input.BTC,9))+"\n\n")
 #2) GET CURRENT PRICE OF BITCOIN:
 	url = 'https://api.gdax.com/products/BTC-USD/trades'
 	res = requests.get(url)
