@@ -1,10 +1,8 @@
-**Two Programs: "Bitcoin_Total.py" and "Bitcoin.Individual.py"**
+* Bitcoin_Total.py is the main program
 
-**Bitcoin_Total.py is the main program**
+* Bitcoin_Individual.py is mostly a test program that isnt really important
 
-**Bitcoin_Individual.py is mostly a test program that isnt really important**
-
-Both programs will scrape the current bitcoin price from GDAX every second and then calculate how much money in US dollars and bitcoin I'm gaining/losing. 
+* Both programs will scrape the current bitcoin price from GDAX every few seconds and then calculate how much money in US dollars I'm gaining or losing. 
 
 **A) Bitcoin_Total.py will:**
 1) output how much USD I currently have in bitcoins.
