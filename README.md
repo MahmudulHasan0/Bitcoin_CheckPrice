@@ -15,6 +15,7 @@ Will eventually use this to make a graph and store that graph in a database.
 6) When I sell bitcoins, it will take in dollars I have gained and the bitcoins I have lost and then recalculate the total USD and bitcoin I currently have
 
 **"Bitcoin.Individual.py" will:**
+
 [Will Need To Fix]
 1) output how much money in USD I traded in for bitcoin for each exchange.
 2) outputs how much money (in USD) I'm gaining/losing per exchange.
