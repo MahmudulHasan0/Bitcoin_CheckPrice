@@ -4,14 +4,10 @@ import json
 import time		
 import sys		
 
-#INPUTING MY EXCHANGES: 
-investment = [ 
-	[100, 0.00838564, 11805.90], [50, 0.00433082, 11314.25], [50, 0.00438647, 11170.71], [50, 0.00494595, 9907.10], [50, 0.00526249, 9311.18], [50,0.00579132, 8460.94], [50,0.00723745,6605.92], [100,0.01046382,9461.17], [0,0.001006,10154], 
-	[50, 0.00511541, 9750.01], [25, 0.00231142, 10788.87], [25, 0.00240592, 10396], [50, 0.0060779400, 8205.95], [25,0.0032192400,7746.42], [25,0.0032635400,7644.33]
-]					 
+#INPUTING MY EXCHANGES: this is an example:
+investment = [ [100, 0.0125, 8000], [100, 0.01666666, 6000] ]	#In this Example, i bought 0.0125 bitcoins with 100 dollars and 0.01666666 bitcoins with another 100 dollars when the price went down.				 
+inWallet = [0, 0.02916666]  #I have a total of 0.02916666 bitcoins in my wallet and $0. If i sold some of that bitcoin, i would change the $0 and decrease the amount of bitcoins i have in the wallet.
 
-inWallet = [50.89, (0.01710293+0.03151101+  0.01454028)]  #What I have in my wallets right now
-#Note: buy with $50.89 when below $8507.99
 class MyProfits():
 	def __init__(self):
 		self.BTC = 0
