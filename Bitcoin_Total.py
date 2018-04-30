@@ -11,6 +11,7 @@ investment = [
 ]					 
 
 inWallet = [50.89, (0.01710293+0.03151101+  0.01454028)]  #What I have in my wallets right now
+#Note: buy with $50.89 when below $8507.99
 class MyProfits():
 	def __init__(self):
 		self.BTC = 0
