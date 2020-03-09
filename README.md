@@ -6,6 +6,7 @@
 **A) Bitcoin_Total.py will:**
 
 ![Bitcoin_total Example](bitcoin_checker_example.PNG "Bitcoin_Total Example")
+The above picture is converting The amound of bitcoins and other cryptocurencites that I own into USD and calculating how much im losing or gaining, the percentage of my investment that im gaining or losing and if the market is going up of down sicne the nth reading. 
 
 1) output how much USD I currently have in bitcoins.
 2) output how much money (in USD) I'm gaining/losing in the current bitcoin market.
