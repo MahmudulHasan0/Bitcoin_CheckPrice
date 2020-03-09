@@ -5,9 +5,7 @@
 
 **A) Bitcoin_Total.py will:**
 
-![Bitcoin_Total Example](https://imgur.com/BXJqheI)
-
-![Alt text](bitcoin_checker_example.PNG "Optional Title")
+![Bitcoin_total Example](bitcoin_checker_example.PNG "Bitcoin_Total Example")
 
 1) output how much USD I currently have in bitcoins.
 2) output how much money (in USD) I'm gaining/losing in the current bitcoin market.
