@@ -4,7 +4,7 @@
 * Both programs will scrape the current bitcoin price from GDAX every few seconds and then calculate how much money in US dollars I'm gaining or losing. 
 
 **A) Bitcoin_Total.py will:**
-
+![Bitcoin_Total Example](https://imgur.com/BXJqheI)
 1) output how much USD I currently have in bitcoins.
 2) output how much money (in USD) I'm gaining/losing in the current bitcoin market.
 3) outputs the percent gain/loss (USD).
