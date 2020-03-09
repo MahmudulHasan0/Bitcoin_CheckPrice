@@ -7,7 +7,7 @@
 
 ![Bitcoin_Total Example](https://imgur.com/BXJqheI)
 
-![Alt text](bitcoin checker example.PNG "Optional Title")
+![Alt text](bitcoin_checker_example.PNG "Optional Title")
 
 1) output how much USD I currently have in bitcoins.
 2) output how much money (in USD) I'm gaining/losing in the current bitcoin market.
