@@ -6,6 +6,7 @@
 **A) Bitcoin_Total.py will:**
 
 ![Bitcoin_Total Example](https://imgur.com/BXJqheI)
+
 ![Alt text](bitcoin checker example.PNG "Optional Title")
 
 1) output how much USD I currently have in bitcoins.
