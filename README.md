@@ -6,7 +6,7 @@
 **A) Bitcoin_Total.py will:**
 
 ![Bitcoin_total Example](bitcoin_checker_example.PNG "Bitcoin_Total Example")
-The above picture is converting The amound of bitcoins and other cryptocurencites that I own into USD and calculating how much im losing or gaining, the percentage of my investment that im gaining or losing and if the market is going up of down sicne the nth reading. 
+The above picture is converting The amount of bitcoins and other cryptocurrencies that I own into USD and calculating how much I'm losing or gaining, the percentage of my investment that I'm gaining or losing and if the market is going up of down since the nth reading. 
 
 1) output how much USD I currently have in bitcoins.
 2) output how much money (in USD) I'm gaining/losing in the current bitcoin market.
@@ -30,7 +30,7 @@ This will help me recalculate how much USD and bitcoins I have in my wallet
 
 **C) INPUTTING YOUR DATA: For Bitcoin_Total.py:**
 * Gains/losses are calculated using the **investment** and **inWallet** arrays. 
-* The **investment** array is what you initially put into the market. It takes in three factors: The amount of money in USD you put into the system (this is the initial investment. It's not need anymore), the number of bitcoins you have bought with that initial investment, and the USD per one BTC price you bought the bitcoins for. The number of bitcoins bought, USD per one Bitcoin price, and the GDAX or Coinbase fees can calculate the initial USD investment 9thats why the USD investment index isn't really needed, will get rid of it in the future).
+* The **investment** array is what you initially put into the market. It takes in three factors: The amount of money in USD you put into the system (this is the initial investment. It's not need anymore), the number of bitcoins you have bought with that initial investment, and the USD per one BTC price you bought the bitcoins for. The number of bitcoins bought, USD per one Bitcoin price, and the GDAX or Coinbase fees can calculate the initial USD investment (thats why the USD investment index isn't really needed, will get rid of it in the future).
 * The **inWallet** array is how much bitcoins and US dollars you have in your account. The program will turn the bitcoins into dollars and will then calculate your gain/loss from your initial investment (in dollars).
 
 ```
